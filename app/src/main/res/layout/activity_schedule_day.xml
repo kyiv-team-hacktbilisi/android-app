@@ -8,17 +8,12 @@
         tools:context=".MainActivity"
         android:background="@android:color/white">
 
-    <!--
-    This title strip will display the currently visible page title, as well as the page
-    titles for adjacent pages.
-    -->
-
     <android.support.v4.view.PagerTitleStrip
             android:id="@+id/pager_title_strip"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="24dp"
             android:layout_gravity="top"
-            android:background="#ff6700e5"
+            android:background="@color/primary_dark"
             android:textAlignment="center"
             android:textColor="#fff"/>
 

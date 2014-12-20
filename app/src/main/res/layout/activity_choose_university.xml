@@ -13,7 +13,7 @@
             android:layout_marginRight="16dp"
             android:lines="1"
             android:singleLine="true"
-            android:hint="Choose university"
+            android:hint="Enter university name"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
             />

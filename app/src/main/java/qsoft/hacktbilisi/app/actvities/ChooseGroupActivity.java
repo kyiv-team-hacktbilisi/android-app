@@ -24,7 +24,7 @@ public class ChooseGroupActivity extends Activity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_group);
-
+        setTitle("Creating group");
         context = this;
     }
 

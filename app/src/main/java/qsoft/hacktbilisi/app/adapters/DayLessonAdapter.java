@@ -28,12 +28,15 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         public TextView tvLessonName;
         public TextView tvTeacherName;
         public TextView tvPlaceTime;
+        public ImageView ivComments;
 
-        public ViewHolder(View v, TextView v1, TextView v2, TextView v3) {
+
+        public ViewHolder(View v, TextView v1, TextView v2, TextView v3, ImageView ivComments) {
             super(v);
-            tvLessonName = v1;
-            tvTeacherName = v2;
-            tvPlaceTime = v3;
+            this.tvLessonName = v1;
+            this.tvTeacherName = v2;
+            this.tvPlaceTime = v3;
+            this.ivComments = ivComments;
         }
     }
 
@@ -56,11 +59,9 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         TextView tvTeacher = (TextView) v.findViewById(R.id.tv_teacher_name);
         TextView tvPlaceT = (TextView) v.findViewById(R.id.tv_place_time);
         ImageView ivComments = (ImageView) v.findViewById(R.id.iv_comment);
-        View.OnClickListener commentClickListener = commetnClickListener();
-        ivComments.setOnClickListener(commentClickListener);
         View.OnClickListener clickListener = clickListener();
         v.setOnClickListener(clickListener);
-        ViewHolder vh = new ViewHolder(v, tvLesson, tvTeacher, tvPlaceT);
+        ViewHolder vh = new ViewHolder(v, tvLesson, tvTeacher, tvPlaceT, ivComments);
         return vh;
     }
 
@@ -72,7 +73,8 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
 //        holder.tvLessonName.setText(mDataset[position]);
 //        holder.tvTeacherName.setText(mDataset[position]);
 //        holder.tvPlaceTime.setText(mDataset[position]);
-
+        View.OnClickListener commentClickListener = commetnClickListener();
+        holder.ivComments.setOnClickListener(commentClickListener);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -12,7 +12,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_centerVertical="true"
-            android:hint="Choose study group"
+            android:hint="Enter study group name"
             android:layout_alignParentStart="true"
             />
 

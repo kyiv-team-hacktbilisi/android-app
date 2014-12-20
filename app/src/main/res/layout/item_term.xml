@@ -9,6 +9,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="16dp"
             android:textSize="14sp"
+            android:text="adsdas"
             android:gravity="center_vertical"
             />
 </LinearLayout>
