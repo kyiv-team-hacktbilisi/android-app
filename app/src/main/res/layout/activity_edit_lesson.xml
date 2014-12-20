@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:fab="http://schemas.android.com/apk/res-auto"
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -9,11 +10,9 @@
     <FrameLayout
             android:layout_width="48dp"
             android:layout_height="fill_parent"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:background="#0099CC"
+            android:background="#00C853"
             android:id="@+id/fl_new_lesson_color"
+            android:foreground="?android:attr/selectableItemBackground"
             />
 
     <LinearLayout
@@ -24,6 +23,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
+            android:layout_toEndOf="@+id/fl_new_lesson_color"
             >
 
         <LinearLayout
@@ -129,9 +129,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="00:00"
+                    android:text="Select start time"
                     android:layout_marginTop="16dp"
                     />
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+        <com.melnykov.fab.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/b_create"
+                android:src="@drawable/ic_action_tick"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="16dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/accent"
+                fab:fab_colorRipple="@color/colorHighlight"
+                />
+</RelativeLayout>
