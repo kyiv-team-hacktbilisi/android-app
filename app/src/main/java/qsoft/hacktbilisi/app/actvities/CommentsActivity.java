@@ -10,6 +10,7 @@ import android.widget.ListView;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.adapters.CommentsAdapter;
 import qsoft.hacktbilisi.app.pojo.Comment;
+import qsoft.hacktbilisi.app.pojo.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,7 +54,7 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
 
     private void setupViews() {
         ivSendComment.setOnClickListener(this);
-        adapter = new CommentsAdapter(context, R.layout.item_comment_other, comments);
+        adapter = new CommentsAdapter(context, comments);
         lvComments.setAdapter(adapter);
     }
 
@@ -78,7 +79,7 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
                 if (c != null && c.length() > 0) {
                     Comment comment = new Comment();
                     comment.setLessonID("12345678");
-                    comment.setAuthorID("12345678");
+                    comment.setAuthorID(User.getCurrentUser().getObjectId());
                     comment.setText(c);
                     comment.setTime(new Date());
                     comments.add(comment);

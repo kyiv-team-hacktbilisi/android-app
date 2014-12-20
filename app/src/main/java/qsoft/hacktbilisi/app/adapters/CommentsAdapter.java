@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.pojo.Comment;
+import qsoft.hacktbilisi.app.pojo.User;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,11 +21,9 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
 
     private Context context;
     private ArrayList<Comment> comments;
-    private int layoutResourceId;
 
-    public CommentsAdapter(Context context, int layoutResourceId, ArrayList<Comment> comments) {
-        super(context, layoutResourceId, comments);
-        this.layoutResourceId = layoutResourceId;
+    public CommentsAdapter(Context context, ArrayList<Comment> comments) {
+        super(context, 0, comments);
         this.context = context;
         this.comments = comments;
     }
@@ -34,7 +33,12 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
 
         if (convertView == null) {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            convertView = inflater.inflate(layoutResourceId, parent, false);
+            if (getItemViewType(position) == 0) {
+                convertView = inflater.inflate(R.layout.item_comment_your, parent, false);
+            } else if (getItemViewType(position) == 1) {
+                convertView = inflater.inflate(R.layout.item_comment_other, parent, false);
+
+            }
         }
 
         Comment comment = this.comments.get(position);
@@ -65,6 +69,19 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
         tvTime.setText(sdf.format(comment.getTime()));
 
         return convertView;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        // Define a way to determine which layout to use, here it's just evens and odds.
+
+        return getItem(position).getAuthorID().equals(User.getCurrentUser().getObjectId()) ?
+                0 : 1;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2; // Count of different layouts
     }
 
 //    private View.OnClickListener imageClickListener(final int position) {

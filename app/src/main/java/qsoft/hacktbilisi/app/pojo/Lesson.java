@@ -1,63 +1,53 @@
 package qsoft.hacktbilisi.app.pojo;
 
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+
 import java.util.Date;
 
 /**
  * Created by andrii on 20.12.14.
  */
-public class Lesson {
-    private String id;
-    private String name;
-    private String teacher;
-    private String type;
-    private String audience;
-    private Date startTime;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+@ParseClassName("Lesson")
+public class Lesson extends ParseObject {
 
     public String getName() {
-        return name;
+        return getString("name");
     }
 
     public void setName(String name) {
-        this.name = name;
+        put("name", name);
     }
 
     public String getTeacher() {
-        return teacher;
+        return getString("teacher");
     }
 
     public void setTeacher(String teacher) {
-        this.teacher = teacher;
+        put("teacher", teacher);
     }
 
     public String getType() {
-        return type;
+        return getString("type");
     }
 
     public void setType(String type) {
-        this.type = type;
+        put("type", type);
     }
 
     public String getAudience() {
-        return audience;
+        return getString("audience");
     }
 
     public void setAudience(String audience) {
-        this.audience = audience;
+        put("audience", audience);
     }
 
     public Date getStartTime() {
-        return startTime;
+        return getDate("startTime");
     }
 
     public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+        put("startTime", startTime);
     }
 }
