@@ -21,6 +21,7 @@ public class ScheduleDayActivity extends FragmentActivity {
     public static ViewPager mViewPager;
 
     public static DaysPagerAdapter mDaysPagerAdapter;
+    private int selected=0;
 
 
     @Override
@@ -50,6 +51,22 @@ public class ScheduleDayActivity extends FragmentActivity {
         mViewPager.setAdapter(mDaysPagerAdapter);
         mDaysPagerAdapter.setContext(this);
         mDaysPagerAdapter.setCurrPage(mViewPager.getCurrentItem());
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                selected = i;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 
     @Override
@@ -63,6 +80,7 @@ public class ScheduleDayActivity extends FragmentActivity {
         switch (item.getItemId()) {
             case R.id.action_add:
                 Intent intent = new Intent(context, EditLessonActivity.class);
+                intent.putExtra("day", selected);
                 startActivity(intent);
                 break;
             case R.id.action_settings:

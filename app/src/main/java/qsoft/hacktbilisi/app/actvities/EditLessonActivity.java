@@ -130,6 +130,7 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
         gameScore.put("start_time", bStartTime.getText().toString());
         gameScore.put("private", swIsPrivate.isChecked());
         gameScore.put("group_id", ParseUser.getCurrentUser().get("group"));
+        gameScore.put("day", getIntent().getIntExtra("day", 0));
         gameScore.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

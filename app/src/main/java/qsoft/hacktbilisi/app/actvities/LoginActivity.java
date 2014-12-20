@@ -16,7 +16,6 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import qsoft.hacktbilisi.app.R;
-import qsoft.hacktbilisi.app.utils.EmailValidator;
 import qsoft.hacktbilisi.app.pojo.User;
 import qsoft.hacktbilisi.app.utils.Logger;
 import qsoft.hacktbilisi.app.utils.Utils;
