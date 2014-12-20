@@ -90,7 +90,7 @@
                     android:src="@drawable/ic_chat"
                     android:layout_below="@+id/fl_split_line"
                     android:layout_alignParentRight="true"
-                    android:foreground="@drawable/ripple_card"
+                    android:background="@drawable/ripple_circle_button"
                     android:padding="14dp"
                     />
         </RelativeLayout>
