@@ -27,7 +27,7 @@ public class ScheduleDayActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_day);
-
+        getActionBar().setElevation(0);
         context = this;
     }
 
@@ -40,6 +40,7 @@ public class ScheduleDayActivity extends FragmentActivity {
 
     private void initViews() {
         mViewPager = (ViewPager) findViewById(R.id.pager);
+//        PagerTitleStrip strip = (PagerTitleStrip)mViewPager.findViewById(R.id.pager_title_strip);
     }
 
     private void setupViews() {
