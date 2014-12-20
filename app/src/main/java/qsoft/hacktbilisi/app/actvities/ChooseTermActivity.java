@@ -28,6 +28,7 @@ public class ChooseTermActivity extends Activity implements AdapterView.OnItemCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_term);
+        setTitle("Choose term");
 
         context = this;
     }

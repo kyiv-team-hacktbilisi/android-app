@@ -25,7 +25,7 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_university);
-
+        setTitle("Creating university");
         context = this;
     }
 
