@@ -8,11 +8,13 @@
             android:orientation="vertical"
             android:layout_centerInParent="true">
         <LinearLayout
+                android:id="@+id/ll_import"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:clickable="true"
                 >
             <ImageView
                     android:layout_width="144dp"
@@ -21,17 +23,19 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Export Schedule"
+                    android:text="Import Schedule"
                     android:textSize="24dp"
                     android:layout_gravity="center"/>
         </LinearLayout>
         <LinearLayout
+                android:id="@+id/ll_create"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
+                android:clickable="true"
                 >
             <ImageView
                     android:layout_width="144dp"
