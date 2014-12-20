@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
+import com.melnykov.fab.FloatingActionButton;
 import qsoft.hacktbilisi.app.R;
 
 /**
@@ -18,7 +18,7 @@ public class ChooseGroupActivity extends Activity implements View.OnClickListene
     private Context context;
 
     private AutoCompleteTextView autoCompleteTextView;
-    private Button bNextCreate;
+    private FloatingActionButton bNextCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,8 @@ public class ChooseGroupActivity extends Activity implements View.OnClickListene
 
     private void initViews() {
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.actv_choose_group);
-        bNextCreate = (Button) findViewById(R.id.b_next_create);
+        bNextCreate = (FloatingActionButton) findViewById(R.id.b_next_create);
+        bNextCreate.show(true);
     }
 
     private void setupViews() {

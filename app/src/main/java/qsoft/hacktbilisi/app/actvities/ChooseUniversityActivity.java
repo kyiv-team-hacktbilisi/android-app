@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
+import com.melnykov.fab.FloatingActionButton;
 import qsoft.hacktbilisi.app.R;
 
 /**
@@ -19,7 +19,7 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
     private Context context;
 
     private AutoCompleteTextView autoCompleteTextView;
-    private Button bNext;
+    private FloatingActionButton bNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,8 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
 
     private void initViews() {
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.actv_choose_university);
-        bNext = (Button) findViewById(R.id.b_next_to_choose_group);
+        bNext = (FloatingActionButton) findViewById(R.id.b_next_to_choose_group);
+        bNext.show(true);
     }
 
     private void setupViews() {
