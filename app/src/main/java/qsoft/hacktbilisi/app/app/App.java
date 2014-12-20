@@ -6,8 +6,6 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import qsoft.hacktbilisi.app.pojo.User;
 
-import java.util.ArrayList;
-
 /**
  * Created by andrii on 20.12.14.
  */
@@ -23,7 +21,7 @@ public class App extends Application {
         super.onCreate();
         app = this;
         this.setAppContext(getApplicationContext());
-//        ParseObject.registerSubclass(User.class);
+        ParseObject.registerSubclass(User.class);
 //        ParseObject.registerSubclass(Event.class);
 //        ParseObject.registerSubclass(Comment.class);
 //        ParseObject.registerSubclass(Organization.class);

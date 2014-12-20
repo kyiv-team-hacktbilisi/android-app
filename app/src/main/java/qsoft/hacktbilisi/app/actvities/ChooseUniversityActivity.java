@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.melnykov.fab.FloatingActionButton;
 import qsoft.hacktbilisi.app.R;
 
@@ -26,20 +29,19 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_university);
         setTitle("Creating university");
+        initViews();
         context = this;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        initViews();
         setupViews();
     }
 
     private void initViews() {
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.actv_choose_university);
         bNext = (FloatingActionButton) findViewById(R.id.b_next_to_choose_group);
-        bNext.show(true);
     }
 
     private void setupViews() {
@@ -49,6 +51,11 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setOnItemClickListener(this);
         bNext.setOnClickListener(this);
+        bNext.show(false);
+        YoYo.with(Techniques.ZoomInUp)
+                .duration(700)
+                .interpolate(new DecelerateInterpolator())
+                .playOn(bNext);
     }
 
     @Override

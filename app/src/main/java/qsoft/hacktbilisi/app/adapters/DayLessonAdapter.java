@@ -57,7 +57,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
 
         TextView tvLesson = (TextView) v.findViewById(R.id.tv_lesson_name);
         TextView tvTeacher = (TextView) v.findViewById(R.id.tv_teacher_name);
-        TextView tvPlaceT = (TextView) v.findViewById(R.id.tv_place_time);
+        TextView tvPlaceT = (TextView) v.findViewById(R.id.tv_place);
         ImageView ivComments = (ImageView) v.findViewById(R.id.iv_comment);
         View.OnClickListener clickListener = clickListener();
         v.setOnClickListener(clickListener);

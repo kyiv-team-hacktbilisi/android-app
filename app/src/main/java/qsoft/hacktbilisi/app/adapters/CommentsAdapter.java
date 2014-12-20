@@ -2,12 +2,10 @@ package qsoft.hacktbilisi.app.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.pojo.Comment;
@@ -41,7 +39,7 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
 
         Comment comment = this.comments.get(position);
 
-        final ImageView ivIcon = (ImageView) convertView.findViewById(R.id.iv_comment_item_icon);
+        final TextView ivIcon = (TextView) convertView.findViewById(R.id.tv_comment_item_icon);
 //        ivIcon.setOnClickListener(imageClickListener(position));
 
         final TextView tvAuthor = (TextView) convertView.findViewById(R.id.tv_comment_item_author);

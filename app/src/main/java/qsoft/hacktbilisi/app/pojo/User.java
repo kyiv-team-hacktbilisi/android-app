@@ -1,44 +1,41 @@
 package qsoft.hacktbilisi.app.pojo;
 
-/**
- * Created by andrii on 20.12.14.
- */
+import com.parse.ParseClassName;
+import com.parse.ParseUser;
 
-public class User {
-    private String name;
-    private String lessonDuration;
-    private String university;
-    private String group;
+@ParseClassName("_User")
+public class User extends ParseUser {
 
     public String getName() {
-        return name;
+        return getString("firstName");
     }
 
     public void setName(String name) {
-        this.name = name;
+        put("firstName", name);
     }
 
+
     public String getLessonDuration() {
-        return lessonDuration;
+        return getString("lessonDuration");
     }
 
     public void setLessonDuration(String lessonDuration) {
-        this.lessonDuration = lessonDuration;
+        put(lessonDuration, "lessonDuration");
     }
 
     public String getUniversity() {
-        return university;
+        return getString("university");
     }
 
     public void setUniversity(String university) {
-        this.university = university;
+        put(university, "university");
     }
 
     public String getGroup() {
-        return group;
+        return getString("group");
     }
 
     public void setGroup(String group) {
-        this.group = group;
+        put(group, "group");
     }
 }

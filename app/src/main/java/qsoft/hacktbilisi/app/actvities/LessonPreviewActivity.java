@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+import com.melnykov.fab.FloatingActionButton;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.pojo.Lesson;
 
@@ -22,7 +22,7 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
     private TextView tvTeacher;
     private TextView tvType;
     private TextView tvTime;
-    private Button bShowComments;
+    private FloatingActionButton bShowComments;
 
     private Lesson lesson;
 
@@ -47,12 +47,12 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
     }
 
     private void initViews() {
-        tvLessonName = (TextView) findViewById(R.id.tv_lesson_preview_name);
         tvTeacher = (TextView) findViewById(R.id.tv_teacher);
         tvAudience = (TextView) findViewById(R.id.tv_audience);
         tvType = (TextView) findViewById(R.id.tv_lesson_type);
         tvTime = (TextView) findViewById(R.id.tv_time);
-        bShowComments = (Button) findViewById(R.id.b_show_comments);
+        bShowComments = (FloatingActionButton) findViewById(R.id.b_show_comments);
+        bShowComments.show(true);
     }
 
     private void setupViews() {

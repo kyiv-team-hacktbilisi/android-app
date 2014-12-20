@@ -6,16 +6,19 @@
                 android:layout_height="match_parent"
         >
     <!--<ProgressBar-->
-            <!--android:id="@+id/pb_comments_full_progress"-->
-            <!--android:layout_width="48dp"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:layout_centerInParent="true"/>-->
+    <!--android:id="@+id/pb_comments_full_progress"-->
+    <!--android:layout_width="48dp"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:layout_centerInParent="true"/>-->
     <ListView
             android:id="@+id/lv_comments"
+            android:listSelector="@android:color/transparent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:dividerHeight="1dp"
-            android:layout_above="@+id/ll_send_comment_container">
+            android:layout_above="@+id/ll_send_comment_container"
+            >
     </ListView>
 
     <RelativeLayout
@@ -23,29 +26,41 @@
             android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             >
+
         <EditText
                 android:id="@+id/et_new_comment"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/iv_send_comment"
                 android:layout_alignParentBottom="true"
-                android:layout_marginRight="4dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="16dp"
+                />
+
         <ImageView
                 android:id="@+id/iv_send_comment"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_send"
                 android:clickable="true"
+                android:padding="8dp"
+                android:background="@drawable/ripple_circle_button"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_alignParentTop="true"
                 />
     </RelativeLayout>
+
+    <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/ll_send_comment_container"
+            android:layout_centerHorizontal="true"
+            android:foreground="@color/grey"
+            >
+    </FrameLayout>
 
 </RelativeLayout>
