@@ -46,7 +46,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.b_sign_up:
                 // todo sign up request
-                Intent intent = new Intent(context, ChooseUniversityActivity.class);
+                Intent intent = new Intent(context, ImportCreateActivity.class);
                 startActivity(intent);
                 break;
             case R.id.b_sign_in:
