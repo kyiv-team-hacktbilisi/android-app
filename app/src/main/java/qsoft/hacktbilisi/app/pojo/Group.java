@@ -6,8 +6,17 @@ import com.parse.ParseObject;
 /**
  * Created by andrii on 20.12.14.
  */
-@ParseClassName("University")
-public class University extends ParseObject {
+@ParseClassName("Group")
+public class Group extends ParseObject{
+
+    public String getUniversityID() {
+        return getString("universityID");
+    }
+
+    public void setUniversityID(String universityID) {
+        put("universityID", universityID);
+    }
+
     public String getName() {
         return getString("name");
     }

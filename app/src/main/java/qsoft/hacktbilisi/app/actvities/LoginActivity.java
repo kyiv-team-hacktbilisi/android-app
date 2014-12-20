@@ -44,7 +44,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         super.onResume();
 
         String token = Utils.restoreLoginState(context);
-
+        final ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
+        dialog.setMessage(getString(R.string.progress_login));
+        dialog.show();
         if (token != null) {
             User.becomeInBackground(token, new LogInCallback() {
                 public void done(ParseUser user, ParseException e) {
@@ -57,6 +59,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 }
             });
         }
+        dialog.dismiss();
 
         initViews();
         setupViews();
