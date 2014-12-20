@@ -9,11 +9,13 @@
     <ImageView
             android:id="@+id/iv_comment_item_icon"
             android:layout_width="48dp"
-            android:layout_height="48dp"/>
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"/>
     <LinearLayout android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:orientation="vertical"
-                  android:layout_marginLeft="8dp">
+                  android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp">
         <TextView
                 android:id="@+id/tv_comment_item_author"
                 android:layout_width="fill_parent"
