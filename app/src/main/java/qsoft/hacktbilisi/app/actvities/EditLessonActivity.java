@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TimePicker;
+import com.melnykov.fab.FloatingActionButton;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.utils.Utils;
 import qsoft.hacktbilisi.app.utils.it.gmariotti.android.example.colorpicker.calendarstock.ColorPickerDialog;
@@ -31,12 +32,14 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
 
     private int selectedColor;
     private String stringSelectedColor;
+    private FloatingActionButton bCreate;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_lesson);
+        initViews();
 
         context = this;
     }
@@ -45,12 +48,12 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
     @Override
     protected void onResume() {
         super.onResume();
-        initViews();
         setupViews();
     }
 
     private void initViews() {
         bStartTime = (Button) findViewById(R.id.b_start_time);
+        bCreate = (FloatingActionButton) findViewById(R.id.b_create);
         flNewLessonColor = (FrameLayout) findViewById(R.id.fl_new_lesson_color);
     }
 
@@ -59,6 +62,7 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
         flNewLessonColor.setOnClickListener(this);
         selectedColor = Utils.colorChoice(this)[0];
         stringSelectedColor = Utils.colorToString(selectedColor);
+        bCreate.setOnClickListener(this);
     }
 
     @Override
@@ -84,6 +88,9 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
                 break;
             case R.id.b_start_time:
                 timePickerDialog(bStartTime);
+                break;
+            case R.id.b_create:
+                //fixme add implementation
                 break;
         }
     }

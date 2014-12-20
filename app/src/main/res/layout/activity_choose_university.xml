@@ -11,11 +11,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:lines="1"
-            android:singleLine="true"
             android:hint="Enter university name"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
+            android:lines="1"
+            android:singleLine="true"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             />
 
     <com.melnykov.fab.FloatingActionButton

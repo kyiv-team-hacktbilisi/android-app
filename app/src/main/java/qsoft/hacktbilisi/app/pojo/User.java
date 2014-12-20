@@ -14,7 +14,6 @@ public class User extends ParseUser {
         put("firstName", name);
     }
 
-
     public String getLessonDuration() {
         return getString("lessonDuration");
     }

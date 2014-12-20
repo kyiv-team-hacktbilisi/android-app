@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,6 +16,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import qsoft.hacktbilisi.app.R;
+import qsoft.hacktbilisi.app.utils.EmailValidator;
 import qsoft.hacktbilisi.app.pojo.User;
 import qsoft.hacktbilisi.app.utils.Logger;
 import qsoft.hacktbilisi.app.utils.Utils;
@@ -75,14 +75,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private void setupViews() {
         bSignUp.setOnClickListener(this);
         bSignIn.setOnClickListener(this);
-        YoYo.with(Techniques.FadeIn)
-                .duration(700)
-                .interpolate(new DecelerateInterpolator())
-                .playOn(bSignIn);
-        YoYo.with(Techniques.FadeIn)
-                .duration(700)
-                .interpolate(new DecelerateInterpolator())
-                .playOn(bSignUp);
     }
 
     @Override
@@ -119,8 +111,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         // If there is a validation error, display the error
         if (validationError) {
-            Toast.makeText(LoginActivity.this, validationErrorMessage.toString(), Toast.LENGTH_LONG)
-                    .show();
+            YoYo.with(Techniques.Shake).duration(700).playOn(email);
+            YoYo.with(Techniques.Shake).duration(700).playOn(pass);
+//            Toast.makeText(LoginActivity.this, validationErrorMessage.toString(), Toast.LENGTH_LONG)
+//                    .show();
             return;
         }
 
@@ -148,7 +142,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 dialog.dismiss();
                 if (e != null) {
                     Logger.d("error = " + e.getMessage() + "; " + e.getCode());
-                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     YoYo.with(Techniques.Shake).duration(700).playOn(email);
                     YoYo.with(Techniques.Shake).duration(700).playOn(pass);
                 } else {
@@ -179,9 +173,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     if (e.getCode() == 202) {
                         YoYo.with(Techniques.Shake).duration(700).playOn(email);
                         YoYo.with(Techniques.Shake).duration(700).playOn(pass);
-                    } else {
-                        Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
+                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 } else {
                     Logger.d("signed up with id = " + User.getCurrentUser().getObjectId());
                     Utils.saveLoginState(user.getSessionToken(), context);
