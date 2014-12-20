@@ -6,10 +6,12 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TimePicker;
+import android.widget.*;
 import com.melnykov.fab.FloatingActionButton;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.utils.Utils;
 import qsoft.hacktbilisi.app.utils.it.gmariotti.android.example.colorpicker.calendarstock.ColorPickerDialog;
@@ -33,6 +35,13 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
     private int selectedColor;
     private String stringSelectedColor;
     private FloatingActionButton bCreate;
+    private EditText lessonName;
+    private EditText audiance;
+    private EditText teacher;
+    private RadioButton rbLecture;
+    private RadioButton rbLabs;
+    private RadioButton rbPractice;
+    private Switch swIsPrivate;
 
 
     @Override
@@ -55,6 +64,14 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
         bStartTime = (Button) findViewById(R.id.b_start_time);
         bCreate = (FloatingActionButton) findViewById(R.id.b_create);
         flNewLessonColor = (FrameLayout) findViewById(R.id.fl_new_lesson_color);
+
+        lessonName = (EditText) findViewById(R.id.actv_lesson_name);
+        audiance = (EditText) findViewById(R.id.actv_audience);
+        teacher = (EditText) findViewById(R.id.actv_teacher);
+        rbLecture = (RadioButton) findViewById(R.id.rb_lecture);
+        rbLabs = (RadioButton) findViewById(R.id.rb_labs);
+        rbPractice = (RadioButton) findViewById(R.id.rb_practice);
+        swIsPrivate = (Switch) findViewById(R.id.sw_isPrivate);
     }
 
     private void setupViews() {
@@ -63,6 +80,7 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
         selectedColor = Utils.colorChoice(this)[0];
         stringSelectedColor = Utils.colorToString(selectedColor);
         bCreate.setOnClickListener(this);
+
     }
 
     @Override
@@ -90,9 +108,34 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
                 timePickerDialog(bStartTime);
                 break;
             case R.id.b_create:
-                //fixme add implementation
+                save();
                 break;
         }
+    }
+
+    private void save() {
+        ParseObject gameScore = new ParseObject("Lesson");
+        gameScore.put("name", lessonName.getText().toString());
+        gameScore.put("audience", Integer.parseInt(audiance.getText().toString()));
+        gameScore.put("teacher", teacher.getText().toString());
+        if (rbLabs.isSelected()) {
+            gameScore.put("type", "laboratory");
+        } else if (rbLecture.isSelected()) {
+            gameScore.put("type", "lection");
+        } else if (rbPractice.isSelected()) {
+            gameScore.put("type", "practice");
+        }
+        gameScore.put("start_time", bStartTime.getText().toString());
+        gameScore.put("color", stringSelectedColor == null ? "#ffffff" : stringSelectedColor);
+        gameScore.put("start_time", bStartTime.getText().toString());
+        gameScore.put("private", swIsPrivate.isChecked());
+        gameScore.put("group_id", ParseUser.getCurrentUser().get("group"));
+        gameScore.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                finish();
+            }
+        });
     }
 
     private void timePickerDialog(final Button button) {

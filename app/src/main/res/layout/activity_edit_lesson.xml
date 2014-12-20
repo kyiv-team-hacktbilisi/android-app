@@ -2,9 +2,9 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:fab="http://schemas.android.com/apk/res-auto"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
         >
 
     <FrameLayout
@@ -51,6 +51,7 @@
                     android:id="@+id/actv_audience"
                     android:textSize="16sp"
                     android:hint="Aud"
+                    android:inputType="number"
                     android:singleLine="true"
                     />
         </LinearLayout>
@@ -64,6 +65,14 @@
                 android:gravity="center_vertical"
                 android:textSize="16sp"
                 android:layout_marginBottom="3dp"
+                />
+
+        <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Private lesson"
+                android:id="@+id/sw_isPrivate"
+                android:layout_marginTop="16dp"
                 />
 
         <LinearLayout
@@ -103,6 +112,7 @@
                         android:text="Practice"
                         android:layout_marginTop="16dp"
                         />
+
             </RadioGroup>
 
             <TextView
@@ -116,6 +126,7 @@
                     android:id="@+id/tv_choose_type"
                     android:visibility="gone"
                     />
+
         </LinearLayout>
 
         <LinearLayout
@@ -134,16 +145,17 @@
                     />
         </LinearLayout>
     </LinearLayout>
-        <com.melnykov.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/b_create"
-                android:src="@drawable/ic_action_tick"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="16dp"
-                fab:fab_colorNormal="@color/primary"
-                fab:fab_colorPressed="@color/accent"
-                fab:fab_colorRipple="@color/colorHighlight"
-                />
+
+    <com.melnykov.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/b_create"
+            android:src="@drawable/ic_action_tick"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            fab:fab_colorNormal="@color/primary"
+            fab:fab_colorPressed="@color/accent"
+            fab:fab_colorRipple="@color/colorHighlight"
+            />
 </RelativeLayout>
