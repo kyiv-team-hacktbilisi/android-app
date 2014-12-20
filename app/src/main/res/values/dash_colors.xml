@@ -1,0 +1,11 @@
+<resources>
+
+
+
+    <string-array name="homescreen_color_choice_values" translatable="false">
+        <item>#ffffff</item>
+        <item>#000000</item>
+    </string-array>
+
+  
+</resources>
