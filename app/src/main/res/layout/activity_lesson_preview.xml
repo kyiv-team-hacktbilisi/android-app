@@ -35,7 +35,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_share"
+                    android:src="@drawable/ic_home"
                     android:cropToPadding="false"
                     />
 
@@ -62,7 +62,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_share"
+                    android:src="@drawable/ic_person"
                     android:cropToPadding="false"
                     />
 
@@ -88,7 +88,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_share"
+                    android:src="@drawable/ic_label"
                     android:cropToPadding="false"
                     />
 
@@ -115,7 +115,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_share"
+                    android:src="@drawable/ic_alarm"
                     android:cropToPadding="false"
                     />
 
@@ -131,4 +131,11 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+            android:id="@+id/b_show_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Commetns"
+            />
 </LinearLayout>

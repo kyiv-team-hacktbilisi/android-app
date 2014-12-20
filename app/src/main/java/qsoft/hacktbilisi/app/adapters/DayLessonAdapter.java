@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import qsoft.hacktbilisi.app.R;
+import qsoft.hacktbilisi.app.actvities.CommentsActivity;
 import qsoft.hacktbilisi.app.actvities.LessonPreviewActivity;
 
 /**
@@ -53,6 +55,9 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         TextView tvLesson = (TextView) v.findViewById(R.id.tv_lesson_name);
         TextView tvTeacher = (TextView) v.findViewById(R.id.tv_teacher_name);
         TextView tvPlaceT = (TextView) v.findViewById(R.id.tv_place_time);
+        ImageView ivComments = (ImageView) v.findViewById(R.id.iv_comment);
+        View.OnClickListener commentClickListener = commetnClickListener();
+        ivComments.setOnClickListener(commentClickListener);
         View.OnClickListener clickListener = clickListener();
         v.setOnClickListener(clickListener);
         ViewHolder vh = new ViewHolder(v, tvLesson, tvTeacher, tvPlaceT);
@@ -86,4 +91,15 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
             }
         };
     }
+
+    private View.OnClickListener commetnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CommentsActivity.class);
+                context.startActivity(intent);
+            }
+        };
+    }
+
 }
