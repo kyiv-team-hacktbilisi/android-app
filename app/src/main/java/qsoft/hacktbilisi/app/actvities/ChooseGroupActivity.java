@@ -138,8 +138,6 @@ public class ChooseGroupActivity extends Activity implements View.OnClickListene
                 } else {
                     YoYo.with(Techniques.Shake).duration(700).playOn(autoCompleteTextView);
                 }
-
-
                 break;
         }
     }

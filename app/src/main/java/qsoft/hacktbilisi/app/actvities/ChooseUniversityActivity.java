@@ -118,8 +118,7 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
                                     public void done(ParseException e) {
                                         if (e == null) {
                                             Logger.d("new uid=" + university.getObjectId());
-//                                            user.setUniversity(university.getObjectId());
-                                            user.setUniversity("sdfgtyuiuytr");
+                                            user.setUniversity(university.getObjectId());
                                             user.saveEventually();
                                         } else {
                                             Logger.d("Creating the object failed");
