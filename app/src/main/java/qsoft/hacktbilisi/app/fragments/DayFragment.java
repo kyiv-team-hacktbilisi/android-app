@@ -62,7 +62,7 @@ public class DayFragment extends Fragment {
         rvLessons.setLayoutManager(mLayoutManager);
         String[] myDataset = {"2", "2", "2", "2"};
         // specify an adapter (see also next example)
-        mAdapter = new DayLessonAdapter(myDataset);
+        mAdapter = new DayLessonAdapter(context, myDataset);
         rvLessons.setAdapter(mAdapter);
     }
 }
