@@ -11,7 +11,7 @@ import qsoft.hacktbilisi.app.pojo.TimeTable;
 /**
  * Created by andrii on 20.12.14.
  */
-public class ActivityScheduleDay extends FragmentActivity {
+public class ScheduleDayActivity extends FragmentActivity {
 
     private Context context;
 
