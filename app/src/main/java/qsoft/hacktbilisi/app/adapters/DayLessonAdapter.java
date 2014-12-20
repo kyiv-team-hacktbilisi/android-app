@@ -1,17 +1,21 @@
 package qsoft.hacktbilisi.app.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import qsoft.hacktbilisi.app.R;
+import qsoft.hacktbilisi.app.actvities.LessonPreviewActivity;
 
 /**
  * Created by andrii on 20.12.14.
  */
 public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.ViewHolder> {
 
+    private Context context;
     private String[] mDataset;
 
     // Provide a reference to the views for each data item
@@ -32,7 +36,8 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public DayLessonAdapter(String[] myDataset) {
+    public DayLessonAdapter(Context context, String[] myDataset) {
+        this.context = context;
         mDataset = myDataset;
     }
 
@@ -48,7 +53,8 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         TextView tvLesson = (TextView) v.findViewById(R.id.tv_lesson_name);
         TextView tvTeacher = (TextView) v.findViewById(R.id.tv_teacher_name);
         TextView tvPlaceT = (TextView) v.findViewById(R.id.tv_place_time);
-
+        View.OnClickListener clickListener = clickListener();
+        v.setOnClickListener(clickListener);
         ViewHolder vh = new ViewHolder(v, tvLesson, tvTeacher, tvPlaceT);
         return vh;
     }
@@ -70,4 +76,14 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         return mDataset.length;
     }
 
+
+    private View.OnClickListener clickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, LessonPreviewActivity.class);
+                context.startActivity(intent);
+            }
+        };
+    }
 }

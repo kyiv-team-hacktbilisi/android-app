@@ -61,7 +61,7 @@ public class ChooseTermActivity extends Activity implements AdapterView.OnItemCl
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(context, ActivityScheduleDay.class);
+        Intent intent = new Intent(context, ScheduleDayActivity.class);
         startActivity(intent);
     }
 }

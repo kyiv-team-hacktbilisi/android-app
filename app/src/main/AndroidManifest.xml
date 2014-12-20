@@ -37,13 +37,19 @@
         </activity>
 
         <activity
-                android:name=".actvities.ImportCreateActivity"
+                android:name=".actvities.ScheduleDayActivity"
                 android:label="@string/app_name"
                 android:screenOrientation="portrait">
         </activity>
 
         <activity
-                android:name=".actvities.ActivityScheduleDay"
+                android:name=".actvities.EditLessonActivity"
+                android:label="@string/app_name"
+                android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+                android:name=".actvities.LessonPreviewActivity"
                 android:label="@string/app_name"
                 android:screenOrientation="portrait">
         </activity>
