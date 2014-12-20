@@ -54,7 +54,7 @@ public class ChooseGroupActivity extends Activity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.b_next_create:
-                Intent intent = new Intent(context, ChooseTermActivity.class);
+                Intent intent = new Intent(context, ScheduleDayActivity.class);
                 startActivity(intent);
                 break;
         }

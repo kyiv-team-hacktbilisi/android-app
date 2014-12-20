@@ -64,6 +64,10 @@ public class ScheduleDayActivity extends FragmentActivity {
                 Intent intent = new Intent(context, EditLessonActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.action_settings:
+                Intent intent2 = new Intent(context, SettingsActivity.class);
+                startActivity(intent2);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
