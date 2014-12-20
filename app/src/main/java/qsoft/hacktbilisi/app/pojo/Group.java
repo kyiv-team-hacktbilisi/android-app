@@ -6,7 +6,7 @@ import com.parse.ParseObject;
 /**
  * Created by andrii on 20.12.14.
  */
-@ParseClassName("_User")
+@ParseClassName("Group")
 public class Group extends ParseObject{
 
     public String getUniversityID() {

@@ -38,6 +38,13 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
 
         context = this;
 
+        User user = (User) User.getCurrentUser();
+        if (user.getUniversity() != null && user.getUniversity().length() > 0) {
+            Intent intent = new Intent(context, ChooseGroupActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         initViews();
     }
 
@@ -78,7 +85,7 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
                             (context, android.R.layout.simple_list_item_1, universities);
                     autoCompleteTextView.setAdapter(adapter);
                 } else {
-                    Logger.d("Error: " + e.getMessage());
+                    Logger.d("Error while load univers: " + e.getMessage());
                     //todo show error screen or message
                 }
             }
@@ -92,7 +99,7 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
                 final String u = autoCompleteTextView.getText().toString();
                 if (u != null && u.length() > 0) {
 
-                    final User user = (User) ParseUser.getCurrentUser();
+                    final User user = (User) User.getCurrentUser();
 
                     ParseQuery<University> query = ParseQuery.getQuery("University");
                     query.whereEqualTo("name", u);
@@ -100,7 +107,7 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
                         public void done(University result, ParseException e) {
                             if (e == null) {
                                 user.setUniversity(result.getObjectId());
-                                user.saveInBackground();
+                                user.saveEventually();
 
                                 Logger.d("Retrieved the object.");
                             } else {
@@ -111,8 +118,9 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
                                     public void done(ParseException e) {
                                         if (e == null) {
                                             Logger.d("new uid=" + university.getObjectId());
-                                            user.setUniversity(university.getObjectId());
-                                            user.saveInBackground();
+//                                            user.setUniversity(university.getObjectId());
+                                            user.setUniversity("sdfgtyuiuytr");
+                                            user.saveEventually();
                                         } else {
                                             Logger.d("Creating the object failed");
                                         }

@@ -51,7 +51,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             User.becomeInBackground(token, new LogInCallback() {
                 public void done(ParseUser user, ParseException e) {
                     if (user != null) {
-                        dialog.dismiss();
                         // The current user is now set to user.
                         Intent intent = new Intent(context, ChooseUniversityActivity.class);
                         startActivity(intent);
@@ -60,6 +59,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 }
             });
         }
+        dialog.dismiss();
 
         initViews();
         setupViews();
