@@ -131,4 +131,11 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+            android:id="@+id/b_show_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Commetns"
+            />
 </LinearLayout>
