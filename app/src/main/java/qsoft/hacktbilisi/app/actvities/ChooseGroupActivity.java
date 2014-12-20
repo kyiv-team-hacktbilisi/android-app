@@ -116,6 +116,7 @@ public class ChooseGroupActivity extends Activity implements View.OnClickListene
                             } else {
                                 final Group group1 = new Group();
                                 group1.setName(group);
+                                group1.setUniversityID(user.getUniversity());
                                 group1.saveInBackground(new SaveCallback() {
                                     @Override
                                     public void done(ParseException e) {
