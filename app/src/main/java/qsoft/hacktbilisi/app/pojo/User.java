@@ -3,6 +3,7 @@ package qsoft.hacktbilisi.app.pojo;
 /**
  * Created by andrii on 20.12.14.
  */
+
 public class User {
     private String name;
     private String lessonDuration;
