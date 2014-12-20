@@ -2,15 +2,11 @@ package qsoft.hacktbilisi.app.actvities;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import it.gmariotti.android.example.colorpicker.Utils;
-import it.gmariotti.android.example.colorpicker.calendarstock.ColorPickerDialog;
-import it.gmariotti.android.example.colorpicker.calendarstock.ColorPickerSwatch;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.adapters.CommentsAdapter;
 import qsoft.hacktbilisi.app.pojo.Comment;

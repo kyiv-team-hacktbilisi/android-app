@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/layout_root"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:padding="10dp"
+              android:background="@color/white">
+    <!--<AutoCompleteTextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/actvDialogUserInput"-->
+    <!--android:singleLine="true">-->
+    <!--<requestFocus/>-->
+    <!--</AutoCompleteTextView>-->
+
+    <qsoft.hacktbilisi.app.objects.PrefAutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/actvDialogUserInput"
+            android:completionThreshold="2"
+            android:singleLine="true"
+            android:dropDownHeight="200dp">
+        <requestFocus/>
+    </qsoft.hacktbilisi.app.objects.PrefAutoCompleteTextView>
+</LinearLayout>

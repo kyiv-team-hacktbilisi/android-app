@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        >
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+            <LinearLayout
+                    android:id="@+id/pref_username_container"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:clickable="true"
+                    >
+
+                <TextView
+                        android:id="@+id/pref_username_label"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:paddingTop="16dp"
+                        android:text="User name"
+                        />
+                <TextView
+                        android:id="@+id/pref_username"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginTop="8dp"
+                        android:paddingBottom="10dp"
+                        />
+            </LinearLayout>
+
+            <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/dark_grey"
+                    />
+            <LinearLayout
+                    android:id="@+id/pref_lesson_duration_container"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:clickable="true"
+                    >
+
+                <TextView
+                        android:id="@+id/pref_lesson_duration_label"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:paddingTop="16dp"
+                        android:text="Lesson duration"
+                        />
+                <TextView
+                        android:id="@+id/pref_lesson_duration"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginTop="8dp"
+                        android:paddingBottom="10dp"
+                        />
+            </LinearLayout>
+
+            <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/dark_grey"
+                    />
+            <LinearLayout
+                    android:id="@+id/pref_university_container"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:clickable="true"
+                    >
+
+                <TextView
+                        android:id="@+id/pref_university_label"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:paddingTop="16dp"
+                        android:text="University"
+                        />
+                <TextView
+                        android:id="@+id/pref_university"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginTop="8dp"
+                        android:paddingBottom="10dp"
+                        />
+            </LinearLayout>
+
+            <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/dark_grey"
+                    />
+            <LinearLayout
+                    android:id="@+id/pref_group_container"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:clickable="true"
+                    >
+
+                <TextView
+                        android:id="@+id/pref_group_label"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:paddingTop="16dp"
+                        android:text="Group"
+                        />
+                <TextView
+                        android:id="@+id/pref_group"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginTop="8dp"
+                        android:paddingBottom="10dp"
+                        />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -48,6 +48,7 @@
                 android:src="@drawable/ic_send"
                 android:clickable="true"
                 android:padding="8dp"
+                android:background="@drawable/ripple_circle_button"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true"
                 />

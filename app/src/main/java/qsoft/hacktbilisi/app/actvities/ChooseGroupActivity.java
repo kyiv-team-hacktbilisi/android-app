@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.melnykov.fab.FloatingActionButton;
 import qsoft.hacktbilisi.app.R;
 
@@ -38,7 +41,12 @@ public class ChooseGroupActivity extends Activity implements View.OnClickListene
     private void initViews() {
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.actv_choose_group);
         bNextCreate = (FloatingActionButton) findViewById(R.id.b_next_create);
-        bNextCreate.show(true);
+        bNextCreate.show(false);
+        YoYo.with(Techniques.ZoomInUp)
+                .duration(700)
+                .interpolate(new DecelerateInterpolator())
+                .playOn(bNextCreate);
+
     }
 
     private void setupViews() {
@@ -54,7 +62,7 @@ public class ChooseGroupActivity extends Activity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.b_next_create:
-                Intent intent = new Intent(context, ChooseTermActivity.class);
+                Intent intent = new Intent(context, ScheduleDayActivity.class);
                 startActivity(intent);
                 break;
         }

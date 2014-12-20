@@ -26,12 +26,12 @@
             android:orientation="vertical"
             android:background="@drawable/comment_body_shape"
             android:paddingLeft="16dp"
-            android:elevation="6dp"
+            android:elevation="4dp"
             android:paddingRight="16dp"
             android:paddingTop="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="8dp"
             >
 
         <TextView
