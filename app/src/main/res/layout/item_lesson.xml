@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+        >
+
     <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view"
@@ -10,13 +12,20 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             card_view:cardCornerRadius="2dp"
-            android:layout_marginTop="16dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardElevation="2dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:foreground="@drawable/ripple_card"
             >
+
         <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                >
+
             <TextView
                     android:id="@+id/tv_lesson_name"
                     android:layout_width="fill_parent"
@@ -27,6 +36,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
                     />
+
             <TextView
                     android:id="@+id/tv_teacher_name"
                     android:layout_width="fill_parent"
@@ -38,14 +48,15 @@
                     android:layout_marginTop="16dp"
                     android:layout_below="@+id/tv_lesson_name"
                     />
+
             <FrameLayout
                     android:id="@+id/fl_split_line"
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:background="#aeaeae"
                     android:layout_below="@+id/tv_teacher_name"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
                     android:layout_marginTop="16dp"
                     />
 
@@ -60,25 +71,27 @@
                     android:layout_marginTop="16dp"
                     android:layout_below="@+id/fl_split_line"
                     />
+
             <ImageView
                     android:id="@+id/iv_share"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/ic_share"
                     android:layout_below="@+id/fl_split_line"
                     android:layout_toLeftOf="@+id/iv_comment"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:foreground="@drawable/ripple_card"
+                    android:padding="14dp"
                     />
+
             <ImageView
                     android:id="@+id/iv_comment"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/ic_chat"
                     android:layout_below="@+id/fl_split_line"
                     android:layout_alignParentRight="true"
-                    android:layout_margin="16dp"
+                    android:foreground="@drawable/ripple_card"
+                    android:padding="14dp"
                     />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
