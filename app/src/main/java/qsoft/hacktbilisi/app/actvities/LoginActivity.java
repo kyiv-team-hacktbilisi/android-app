@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 import qsoft.hacktbilisi.app.R;
+import qsoft.hacktbilisi.app.utils.EmailValidator;
 
 
 public class LoginActivity extends Activity implements View.OnClickListener {
@@ -48,36 +51,34 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private void setupViews() {
         bSignUp.setOnClickListener(this);
         bSignIn.setOnClickListener(this);
-        YoYo.with(Techniques.FadeIn)
-                .duration(700)
-                .interpolate(new DecelerateInterpolator())
-                .playOn(bSignIn);
-        YoYo.with(Techniques.FadeIn)
-                .duration(700)
-                .interpolate(new DecelerateInterpolator())
-                .playOn(bSignUp);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.b_sign_up:
-                if (checkUserExisting()) {
+                if (!new EmailValidator().validate(email.getText().toString())) {
                     YoYo.with(Techniques.Shake).duration(700).playOn(email);
                     YoYo.with(Techniques.Shake).duration(700).playOn(pass);
                 } else {
-                    // todo sign up request
-                    Intent intent = new Intent(context, ChooseUniversityActivity.class);
-                    startActivity(intent);
+                    ParseUser user = new ParseUser();
+                    user.setUsername(email.getText().toString());
+                    user.setPassword(pass.getText().toString());
+                    user.setEmail(email.getText().toString());
+                    user.signUpInBackground(new SignUpCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Intent intent = new Intent(context, ChooseUniversityActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                 }
                 break;
             case R.id.b_sign_in:
-                // todo sign in request
                 if (checkPass()) {
                     YoYo.with(Techniques.Shake).duration(700).playOn(email);
                     YoYo.with(Techniques.Shake).duration(700).playOn(pass);
                 } else {
-                    // todo sign up request
                     Intent intent = new Intent(context, ChooseUniversityActivity.class);
                     startActivity(intent);
                 }
@@ -90,8 +91,4 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         return false;
     }
 
-    private boolean checkUserExisting() {
-        //fixme write real check!
-        return false;
-    }
 }

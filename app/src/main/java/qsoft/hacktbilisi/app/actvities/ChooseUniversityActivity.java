@@ -5,12 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.melnykov.fab.FloatingActionButton;
 import qsoft.hacktbilisi.app.R;
 
@@ -52,10 +49,11 @@ public class ChooseUniversityActivity extends Activity implements View.OnClickLi
         autoCompleteTextView.setOnItemClickListener(this);
         bNext.setOnClickListener(this);
         bNext.show(false);
-        YoYo.with(Techniques.ZoomInUp)
-                .duration(700)
-                .interpolate(new DecelerateInterpolator())
-                .playOn(bNext);
+//        YoYo.with(Techniques.ZoomInUp)
+//                .duration(400)
+//                .delay(100)
+//                .interpolate(new DecelerateInterpolator())
+//                .playOn(bNext);
     }
 
     @Override
