@@ -7,6 +7,11 @@
     <color name="grey">#cccccc</color>
     <color name="light_grey">#eeeeee</color>
 
+    <color name="primary_dark">#0D47A1</color>
+    <color name="primary">#1565C0</color>
+    <color name="accent">#1565C0</color>
+    <color name="colorHighlight">#2196F3</color>
+
     <string-array name="default_color_choice_values" translatable="false">
         <item>#0099CC</item>
         <item>#9933CC</item>
