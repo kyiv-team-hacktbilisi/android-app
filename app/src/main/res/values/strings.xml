@@ -11,5 +11,6 @@
     <string name="thursday">Thursday</string>
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
+    <string name="dialog_color_picker_title">Select color</string>
 
 </resources>
