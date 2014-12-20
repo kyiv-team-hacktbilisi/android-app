@@ -20,7 +20,7 @@ public class User extends ParseUser {
     }
 
     public void setLessonDuration(String lessonDuration) {
-        put(lessonDuration, "lessonDuration");
+        put("lessonDuration", lessonDuration);
     }
 
     public String getUniversity() {
@@ -28,7 +28,7 @@ public class User extends ParseUser {
     }
 
     public void setUniversity(String university) {
-        put(university, "university");
+        put("university", university);
     }
 
     public String getGroup() {
@@ -36,6 +36,6 @@ public class User extends ParseUser {
     }
 
     public void setGroup(String group) {
-        put(group, "group");
+        put("group", group);
     }
 }
