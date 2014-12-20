@@ -100,7 +100,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
             <Button
-                    android:id="@+id/b_from"
+                    android:id="@+id/b_start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
