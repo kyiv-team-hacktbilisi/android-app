@@ -42,6 +42,22 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
+
+        String token = Utils.restoreLoginState(context);
+
+        if (token != null) {
+            User.becomeInBackground(token, new LogInCallback() {
+                public void done(ParseUser user, ParseException e) {
+                    if (user != null) {
+                        // The current user is now set to user.
+                        Intent intent = new Intent(context, ChooseUniversityActivity.class);
+                        startActivity(intent);
+                    }
+                    finish();
+                }
+            });
+        }
+
         initViews();
         setupViews();
     }
@@ -102,7 +118,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         User user = new User();
         user.setUsername(usernameEmail);
         user.setPassword(password);
-        user.setEmail(usernameEmail);
 
         if (id == R.id.b_sign_in) {
             sigIn(usernameEmail, password);
@@ -141,12 +156,17 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         });
     }
 
-    private void signUp(User user) {
+    private void signUp(final User user) {
+        final ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
+        dialog.setMessage(getString(R.string.progress_signup));
+        dialog.show();
+
         user.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
-//                dialog.dismiss();
+                dialog.dismiss();
                 if (e != null) {
+                    Logger.d("error = " + e.getMessage() + "; " + e.getCode());
                     if (e.getCode() == 202) {
                         YoYo.with(Techniques.Shake).duration(700).playOn(email);
                         YoYo.with(Techniques.Shake).duration(700).playOn(pass);
@@ -154,6 +174,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 } else {
                     Logger.d("signed up with id = " + User.getCurrentUser().getObjectId());
+                    Utils.saveLoginState(user.getSessionToken(), context);
                     Intent intent = new Intent(context, ChooseUniversityActivity.class);
                     startActivity(intent);
                 }

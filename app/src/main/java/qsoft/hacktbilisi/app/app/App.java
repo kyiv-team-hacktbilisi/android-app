@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.parse.Parse;
 import com.parse.ParseObject;
+import qsoft.hacktbilisi.app.pojo.University;
 import qsoft.hacktbilisi.app.pojo.User;
 
 /**
@@ -22,7 +23,7 @@ public class App extends Application {
         app = this;
         this.setAppContext(getApplicationContext());
         ParseObject.registerSubclass(User.class);
-//        ParseObject.registerSubclass(Event.class);
+        ParseObject.registerSubclass(University.class);
 //        ParseObject.registerSubclass(Comment.class);
 //        ParseObject.registerSubclass(Organization.class);
 //        ParseObject.registerSubclass(Data.class);
