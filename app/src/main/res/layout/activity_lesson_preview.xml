@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <TextView
-            android:id="@+id/tv_lesson_preview_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Computer Science"
-            android:textSize="24sp"
-            android:gravity="center_vertical"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:fab="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        >
 
     <LinearLayout
             android:layout_width="fill_parent"
@@ -22,6 +13,7 @@
             android:id="@+id/linearLayout"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
             >
 
         <LinearLayout
@@ -77,6 +69,7 @@
                     />
 
         </LinearLayout>
+
         <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
@@ -130,12 +123,22 @@
                     />
 
         </LinearLayout>
+
+
     </LinearLayout>
 
-    <Button
-            android:id="@+id/b_show_comments"
+    <com.melnykov.fab.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Commetns"
+            android:id="@+id/b_show_comments"
+            android:src="@drawable/ic_action_add"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            fab:fab_colorNormal="@color/primary"
+            fab:fab_colorPressed="@color/accent"
+            fab:fab_colorRipple="@color/colorHighlight"
             />
-</LinearLayout>
+
+
+</RelativeLayout>

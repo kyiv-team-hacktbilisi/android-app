@@ -53,7 +53,7 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
 
     private void setupViews() {
         ivSendComment.setOnClickListener(this);
-        adapter = new CommentsAdapter(context, R.layout.item_comment, comments);
+        adapter = new CommentsAdapter(context, R.layout.item_comment_other, comments);
         lvComments.setAdapter(adapter);
     }
 
