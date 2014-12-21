@@ -125,9 +125,8 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
         } else {
             gameScore.put("type", "practice");
         }
-        gameScore.put("start_time", bStartTime.getText().toString());
+        gameScore.put("startTime", bStartTime.getText().toString());
         gameScore.put("color", stringSelectedColor == null ? "#ffffff" : stringSelectedColor);
-        gameScore.put("start_time", bStartTime.getText().toString());
         gameScore.put("private", swIsPrivate.isChecked());
         gameScore.put("group_id", ParseUser.getCurrentUser().get("group"));
         gameScore.put("day", getIntent().getIntExtra("day", 0));

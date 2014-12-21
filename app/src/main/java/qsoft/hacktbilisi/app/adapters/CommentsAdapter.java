@@ -7,9 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.pojo.Comment;
 import qsoft.hacktbilisi.app.pojo.User;
+import qsoft.hacktbilisi.app.utils.Logger;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,18 +55,18 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
         TextView tvTime = (TextView) convertView.findViewById(R.id.tv_comment_item_time);
 
         //todo get user name and photo
-//        comment.getParseObject("authorID")
-//                .fetchIfNeededInBackground(new GetCallback<ParseObject>() {
-//                    public void done(ParseObject user, ParseException e) {
-//                        String title = user.getString("firstName") + " " + user.getString("lastName");
-//                        tvAuthor.setText(title);
-//                        User user1 = (User) user;
-//                        Picasso.with(context)
-//                                .load(user1.getPhoto())
-//                                .resizeDimen(R.dimen.comment_user_icon_size, R.dimen.comment_user_icon_size)
-//                                .into(ivIcon);
-//                    }
-//                });
+        ParseQuery<User> query = ParseQuery.getQuery("_User");
+        query.whereEqualTo("objectId", comment.getAuthorID());
+        query.getFirstInBackground(new GetCallback<User>() {
+            public void done(User result, ParseException e) {
+                if (e == null) {
+                    tvAuthor.setText(result.getName());
+                    Logger.d("Retrieved the object.");
+                } else {
+                    Logger.e("The getFirst request failed.");
+                }
+            }
+        });
 
         tvText.setText(comment.getText());
         SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm");

@@ -85,7 +85,6 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        Logger.d("mDataset.get(position).getObjectId()=" + mDataset.get(position).getObjectId());
         View.OnClickListener clickListener = clickListener(mDataset.get(position).getObjectId(),
                 mDataset.get(position).getString("name"));
         holder.itemView.setOnClickListener(clickListener);
@@ -113,11 +112,11 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String start_time = mDataset.get(pos).getString("start_time");
+                String start_time = mDataset.get(pos).getString("startTime");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
                 Date data = null;
                 try {
-                    data = simpleDateFormat.parse(mDataset.get(pos).getString("start_time"));
+                    data = simpleDateFormat.parse(mDataset.get(pos).getString("startTime"));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
