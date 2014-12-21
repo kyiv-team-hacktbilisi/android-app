@@ -35,6 +35,7 @@
                         android:textSize="16sp"
                         android:paddingTop="16dp"
                         android:text="User name"
+                        android:textStyle="bold"
                         />
 
                 <TextView
@@ -47,15 +48,7 @@
                         />
             </LinearLayout>
 
-            <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@color/dark_grey"
-                    />
-
-            <LinearLayout
+                <LinearLayout
                     android:id="@+id/pref_lesson_duration_container"
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
@@ -72,6 +65,7 @@
                         android:textSize="16sp"
                         android:paddingTop="16dp"
                         android:text="Lesson duration"
+                        android:textStyle="bold"
                         />
 
                 <TextView
@@ -84,15 +78,7 @@
                         />
             </LinearLayout>
 
-            <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@color/dark_grey"
-                    />
-
-            <LinearLayout
+                <LinearLayout
                     android:id="@+id/pref_university_container"
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
@@ -109,6 +95,7 @@
                         android:textSize="16sp"
                         android:paddingTop="16dp"
                         android:text="University"
+                        android:textStyle="bold"
                         />
 
                 <TextView
@@ -121,15 +108,7 @@
                         />
             </LinearLayout>
 
-            <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@color/dark_grey"
-                    />
-
-            <LinearLayout
+                <LinearLayout
                     android:id="@+id/pref_group_container"
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
@@ -146,6 +125,7 @@
                         android:textSize="16sp"
                         android:paddingTop="16dp"
                         android:text="Group"
+                        android:textStyle="bold"
                         />
 
                 <TextView
