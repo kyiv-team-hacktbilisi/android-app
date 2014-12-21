@@ -86,7 +86,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
 //        holder.tvLessonName.setText(mDataset[position]);
 //        holder.tvTeacherName.setText(mDataset[position]);
 //        holder.tvPlaceTime.setText(mDataset[position]);
-        View.OnClickListener commentClickListener = commetnClickListener();
+        View.OnClickListener commentClickListener = commetnClickListener(mDataset.get(position).getObjectId());
         holder.ivComments.setOnClickListener(commentClickListener);
 
         try {
@@ -121,11 +121,12 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         };
     }
 
-    private View.OnClickListener commetnClickListener() {
+    private View.OnClickListener commetnClickListener(final String lessonID) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CommentsActivity.class);
+                intent.putExtra("lessonID", lessonID);
                 context.startActivity(intent);
             }
         };

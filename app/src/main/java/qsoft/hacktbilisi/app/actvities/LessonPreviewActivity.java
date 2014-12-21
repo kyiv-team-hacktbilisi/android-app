@@ -37,6 +37,7 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
 
     private void loadLesson() {
         // todo load lesson
+        
     }
 
     @Override
@@ -73,6 +74,7 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.b_show_comments:
                 Intent intent = new Intent(context, CommentsActivity.class);
+                intent.putExtra("lessonID", lesson.getObjectId());
                 startActivity(intent);
                 break;
         }

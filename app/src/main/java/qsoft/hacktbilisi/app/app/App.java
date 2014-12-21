@@ -4,9 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.parse.Parse;
 import com.parse.ParseObject;
-import qsoft.hacktbilisi.app.pojo.Group;
-import qsoft.hacktbilisi.app.pojo.University;
-import qsoft.hacktbilisi.app.pojo.User;
+import qsoft.hacktbilisi.app.pojo.*;
 
 /**
  * Created by andrii on 20.12.14.
@@ -26,8 +24,8 @@ public class App extends Application {
         ParseObject.registerSubclass(User.class);
         ParseObject.registerSubclass(University.class);
         ParseObject.registerSubclass(Group.class);
-//        ParseObject.registerSubclass(Organization.class);
-//        ParseObject.registerSubclass(Data.class);
+        ParseObject.registerSubclass(Comment.class);
+        ParseObject.registerSubclass(Lesson.class);
         Parse.initialize(this, "ti6w15PJjCOcdmOOy9Yxo6P25ZcSTFMxSbtBJULx", "rPhiEYbAfar6lomtMuoveMuDJvQCQ3bBML5sNU9w");
     }
 
