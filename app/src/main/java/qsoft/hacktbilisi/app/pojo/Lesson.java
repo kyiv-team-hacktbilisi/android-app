@@ -3,8 +3,6 @@ package qsoft.hacktbilisi.app.pojo;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
-import java.util.Date;
-
 /**
  * Created by andrii on 20.12.14.
  */
@@ -43,11 +41,12 @@ public class Lesson extends ParseObject {
         put("audience", audience);
     }
 
-    public Date getStartTime() {
-        return getDate("startTime");
+    public String getStartTime() {
+        return getString("startTime");
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         put("startTime", startTime);
     }
+
 }

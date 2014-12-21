@@ -24,7 +24,7 @@
     <RelativeLayout
             android:id="@+id/ll_send_comment_container"
             android:layout_width="fill_parent"
-            android:layout_height="48dp"
+            android:layout_height="56dp"
             android:layout_alignParentBottom="true"
             >
 

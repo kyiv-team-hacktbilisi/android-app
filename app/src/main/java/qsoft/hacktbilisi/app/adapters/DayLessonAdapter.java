@@ -13,6 +13,7 @@ import com.parse.ParseUser;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.actvities.CommentsActivity;
 import qsoft.hacktbilisi.app.actvities.LessonPreviewActivity;
+import qsoft.hacktbilisi.app.utils.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -75,8 +76,6 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         TextView ivEndTime = (TextView) v.findViewById(R.id.iv_end_time);
         ImageView ivComments = (ImageView) v.findViewById(R.id.iv_comment);
         ImageView ivShare = (ImageView) v.findViewById(R.id.iv_share);
-        View.OnClickListener clickListener = clickListener();
-        v.setOnClickListener(clickListener);
         ViewHolder vh = new ViewHolder(v, tvLesson, tvTeacher, tvPlaceT, ivComments, ivStartTime, ivEndTime, ivShare);
         return vh;
     }
@@ -84,6 +83,12 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        // - get element from your dataset at this position
+        // - replace the contents of the view with that element
+        Logger.d("mDataset.get(position).getObjectId()=" + mDataset.get(position).getObjectId());
+        View.OnClickListener clickListener = clickListener(mDataset.get(position).getObjectId(),
+                mDataset.get(position).getString("name"));
+        holder.itemView.setOnClickListener(clickListener);
         View.OnClickListener commentClickListener = commetnClickListener(mDataset.get(position).getObjectId());
         View.OnClickListener shareClickListener = shareClickListener(position);
         holder.ivComments.setOnClickListener(commentClickListener);
@@ -91,8 +96,8 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-            Date data = simpleDateFormat.parse(mDataset.get(position).getString("start_time"));
-            holder.ivStartTime.setText(mDataset.get(position).getString("start_time"));
+            Date data = simpleDateFormat.parse(mDataset.get(position).getString("startTime"));
+            holder.ivStartTime.setText(mDataset.get(position).getString("startTime"));
             int d = ParseUser.getCurrentUser().getInt("lessonDuration");
             holder.ivEndTime.setText(simpleDateFormat.format(new Date(data.getTime() +
                     (60000 * (d == 0 ? 90 : d)))));
@@ -101,7 +106,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         }
         holder.tvLessonName.setText(mDataset.get(position).getString("name"));
         holder.tvTeacherName.setText(mDataset.get(position).getString("teacher"));
-        holder.tvPlaceTime.setText(mDataset.get(position).getString("audience"));
+        holder.tvPlaceTime.setText("Room "+mDataset.get(position).getString("audience"));
     }
 
     private View.OnClickListener shareClickListener(final int pos) {
@@ -139,11 +144,13 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
     }
 
 
-    private View.OnClickListener clickListener() {
+    private View.OnClickListener clickListener(final String lessonID, final String lessonName) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, LessonPreviewActivity.class);
+                intent.putExtra("lessonID", lessonID);
+                intent.putExtra("lessonName", lessonName);
                 context.startActivity(intent);
             }
         };

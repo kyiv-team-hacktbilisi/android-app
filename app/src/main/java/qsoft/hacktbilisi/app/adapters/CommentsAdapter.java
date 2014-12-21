@@ -2,11 +2,13 @@ package qsoft.hacktbilisi.app.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import com.parse.*;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.pojo.Comment;
 import qsoft.hacktbilisi.app.pojo.User;
@@ -50,21 +52,38 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
         TextView tvText = (TextView) convertView.findViewById(R.id.tv_comment_item_text);
         TextView tvTime = (TextView) convertView.findViewById(R.id.tv_comment_item_time);
 
-        //todo get user name and photo
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("objectId", comment.getAuthorID());
+        query.getFirstInBackground(new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                ivIcon.setText(user.getString("username").substring(0, 1).toUpperCase());
+                tvAuthor.setText(user.getString("username"));
+                Log.d("score", "Retrieved the object.");
+            }
+        });
+
 //        comment.getParseObject("authorID")
 //                .fetchIfNeededInBackground(new GetCallback<ParseObject>() {
 //                    public void done(ParseObject user, ParseException e) {
-//                        String title = user.getString("firstName") + " " + user.getString("lastName");
-//                        tvAuthor.setText(title);
-//                        User user1 = (User) user;
-//                        Picasso.with(context)
-//                                .load(user1.getPhoto())
-//                                .resizeDimen(R.dimen.comment_user_icon_size, R.dimen.comment_user_icon_size)
-//                                .into(ivIcon);
+//                        if (user == null) {
+//                            Log.d("score", "The getFirst request failed.");
+//                        } else {
+//                            ivIcon.setText(user.getString("username").substring(0, 1).toUpperCase());
+//                            tvAuthor.setText(user.getString("username").substring(0, user.getString("username").indexOf("@")));
+//                            Log.d("score", "Retrieved the object.");
+//                        }
 //                    }
 //                });
 
         tvText.setText(comment.getText());
+//        ParseQuery<ParseUser> query = ParseQuery.getQuery("User");
+//        query.whereEqualTo("objectId", comment.getAuthorID());
+//        query.getFirstInBackground(new GetCallback<ParseUser>() {
+//            public void done(ParseUser object, ParseException e) {
+//
+//            }
+//        });
         SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm");
         tvTime.setText(sdf.format(comment.getTime()));
 

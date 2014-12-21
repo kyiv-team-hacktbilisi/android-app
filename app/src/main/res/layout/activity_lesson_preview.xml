@@ -131,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/b_show_comments"
-            android:src="@drawable/ic_action_add"
+            android:src="@drawable/ic_action"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_margin="16dp"
@@ -146,6 +146,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Comments"
                 android:id="@+id/tv_comments"
+                android:elevation="2dp"
                 android:layout_below="@+id/linearLayout"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
@@ -158,9 +159,24 @@
 
         <ListView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:id="@+id/lv_comments"
+                android:listSelector="@android:color/transparent"
                 android:layout_below="@+id/tv_comments"
+                />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/tv_comments_count"
+                android:layout_below="@+id/lv_comments"
+                android:layout_alignParentStart="false"
+                android:layout_marginLeft="16dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentRight="false"
+                android:layout_marginRight="16dp"
+                android:layout_centerHorizontal="true"
                 />
 
 
