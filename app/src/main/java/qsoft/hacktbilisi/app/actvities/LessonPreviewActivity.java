@@ -59,7 +59,6 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
     }
 
     private void loadLesson() {
-        // todo load lesson
         ParseQuery<Lesson> query = ParseQuery.getQuery("Lesson");
         query.whereEqualTo("objectId", lessonID);
         query.getFirstInBackground(new GetCallback<Lesson>() {
@@ -99,10 +98,9 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
         query.findInBackground(new FindCallback<Comment>() {
             @Override
             public void done(List<Comment> list, ParseException e) {
-                if (list.isEmpty()) {
-                    tvComm.setVisibility(View.INVISIBLE);
-                    cList.setVisibility(View.INVISIBLE);
-                } else {
+                if (!list.isEmpty()) {
+                    tvComm.setVisibility(View.VISIBLE);
+                    cList.setVisibility(View.VISIBLE);
                     ArrayList<Comment> comments = new ArrayList<>();
                     comments.add(list.get(0));
                     cList.setAdapter(new CommentsAdapter(LessonPreviewActivity.this, comments));
@@ -111,6 +109,9 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
                         ((TextView) findViewById(R.id.tv_comments_count)).setText("and " + n +
                                 " other comment" + (n == 1 ? "" : "s"));
                     }
+                } else {
+                    tvComm.setVisibility(View.INVISIBLE);
+                    cList.setVisibility(View.INVISIBLE);
                 }
             }
         });

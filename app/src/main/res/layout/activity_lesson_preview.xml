@@ -155,6 +155,7 @@
                 android:textColor="@color/white"
                 android:background="@color/primary"
                 android:layout_marginTop="16dp"
+                android:visibility="invisible"
                 />
 
         <ListView
