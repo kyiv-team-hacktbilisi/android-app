@@ -64,22 +64,11 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
 
     private void setupViews() {
         loadComments();
-
+        setTitle("Comments");
         ivSendComment.setOnClickListener(this);
     }
 
     private void loadComments() {
-        comments = new ArrayList<>();
-        Comment comment = new Comment();
-        comment.setLessonID("12345678");
-        comment.setAuthorID("12345678");
-        comment.setText("12345678");
-        comment.setTime(new Date());
-        comments.add(comment);
-        comments.add(comment);
-        comments.add(comment);
-        comments.add(comment);
-
         ParseQuery<Comment> query = ParseQuery.getQuery("Comment");
         query.whereEqualTo("lessonID", lessonID);
         query.findInBackground(new FindCallback<Comment>() {
@@ -88,9 +77,9 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
                     comments = new ArrayList<>(eventList);
                     adapter = new CommentsAdapter(context, comments);
                     lvComments.setAdapter(adapter);
+                    lvComments.smoothScrollToPosition(adapter.getCount() - 1);
                 } else {
                     Logger.d("Error: " + e.getMessage());
-                    //todo show error screen or message
                 }
             }
         });

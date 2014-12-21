@@ -2,6 +2,7 @@ package qsoft.hacktbilisi.app.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,6 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
         TextView tvText = (TextView) convertView.findViewById(R.id.tv_comment_item_text);
         TextView tvTime = (TextView) convertView.findViewById(R.id.tv_comment_item_time);
 
-        //todo get user name and photo
         ParseQuery<User> query = ParseQuery.getQuery("_User");
         query.whereEqualTo("objectId", comment.getAuthorID());
         query.getFirstInBackground(new GetCallback<User>() {
@@ -88,19 +88,4 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
     public int getViewTypeCount() {
         return 2; // Count of different layouts
     }
-
-//    private View.OnClickListener imageClickListener(final int position) {
-//        return new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                switch (v.getId()) {
-//                    case R.id.iv_comment_item_icon:
-//                        Intent intent = new Intent(context, UserProfileActivity.class);
-//                        intent.putExtra("userID", comments.get(position).getAuthorID());
-//                        context.startActivity(intent);
-//                        break;
-//                }
-//            }
-//        };
-//    }
 }

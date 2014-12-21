@@ -110,7 +110,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         }
         holder.tvLessonName.setText(mDataset.get(position).getString("name"));
         holder.tvTeacherName.setText(mDataset.get(position).getString("teacher"));
-        holder.tvPlaceTime.setText(mDataset.get(position).getString("audience"));
+        holder.tvPlaceTime.setText("Room "+mDataset.get(position).getString("audience"));
     }
 
     private View.OnClickListener shareClickListener(final int pos) {

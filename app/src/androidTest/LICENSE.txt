@@ -1,0 +1,14 @@
+The icons in this ZIP file were downloaded from http://icons4android.com 
+
+All icons are licensed under Linkware (http://icons8.com/license)
+Please note that one condition of this license is attribution. 
+
+If you use these icons in your project(s), you must add a link to 
+
+http://icons8.com/android-L
+
+on your website or playstore site. 
+
+Example of correct attribution: 
+
+ App icons by <a href="http://icons8.com/android-L">Icons8.com</a>.

@@ -5,18 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.melnykov.fab.FloatingActionButton;
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import qsoft.hacktbilisi.app.R;
+import qsoft.hacktbilisi.app.adapters.CommentsAdapter;
+import qsoft.hacktbilisi.app.pojo.Comment;
 import qsoft.hacktbilisi.app.pojo.Lesson;
 import qsoft.hacktbilisi.app.pojo.User;
 import qsoft.hacktbilisi.app.utils.Logger;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by andrii on 20.12.14.
@@ -34,6 +40,8 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
 
     private String lessonID;
     private Lesson lesson;
+    private ListView cList;
+    private TextView tvComm;
     private String lessonName;
 
     @Override
@@ -75,10 +83,34 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
                     } catch (java.text.ParseException ex) {
                         ex.printStackTrace();
                     }
-
+                    getComments(lessonID);
                     Logger.d("Retrieved the object.");
                 } else {
                     Logger.e("The getFirst request failed.");
+                }
+            }
+        });
+    }
+
+    private void getComments(String lessonID) {
+        ParseQuery<Comment> query = ParseQuery.getQuery("Comment");
+        query.whereEqualTo("lessonID", lessonID);
+        query.orderByDescending("updatedAt");
+        query.findInBackground(new FindCallback<Comment>() {
+            @Override
+            public void done(List<Comment> list, ParseException e) {
+                if (list.isEmpty()) {
+                    tvComm.setVisibility(View.INVISIBLE);
+                    cList.setVisibility(View.INVISIBLE);
+                } else {
+                    ArrayList<Comment> comments = new ArrayList<>();
+                    comments.add(list.get(0));
+                    cList.setAdapter(new CommentsAdapter(LessonPreviewActivity.this, comments));
+                    int n = list.size() - 1;
+                    if (n != 0) {
+                        ((TextView) findViewById(R.id.tv_comments_count)).setText("and " + n +
+                                " other comment" + (n == 1 ? "" : "s"));
+                    }
                 }
             }
         });
@@ -99,11 +131,12 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
         tvTime = (TextView) findViewById(R.id.tv_time);
         bShowComments = (FloatingActionButton) findViewById(R.id.b_show_comments);
         bShowComments.show(true);
+        cList = (ListView) findViewById(R.id.lv_comments);
+        tvComm = (TextView) findViewById(R.id.tv_comments);
     }
 
     private void setupViews() {
         loadLesson();
-
         bShowComments.setOnClickListener(this);
     }
 
