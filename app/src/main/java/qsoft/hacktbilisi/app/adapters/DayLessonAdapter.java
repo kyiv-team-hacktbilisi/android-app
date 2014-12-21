@@ -2,18 +2,19 @@ package qsoft.hacktbilisi.app.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.actvities.CommentsActivity;
 import qsoft.hacktbilisi.app.actvities.LessonPreviewActivity;
-import qsoft.hacktbilisi.app.utils.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +33,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private LinearLayout llLessonColor;
         private final TextView ivStartTime;
         private final TextView ivEndTime;
         private final ImageView ivShare;
@@ -42,8 +44,9 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         public ImageView ivComments;
 
 
-        public ViewHolder(View v, TextView v1, TextView v2, TextView v3, ImageView ivComments, TextView ivStartTime, TextView ivEndTime, ImageView ivShare) {
+        public ViewHolder(View v, LinearLayout l1, TextView v1, TextView v2, TextView v3, ImageView ivComments, TextView ivStartTime, TextView ivEndTime, ImageView ivShare) {
             super(v);
+            this.llLessonColor = l1;
             this.tvLessonName = v1;
             this.tvTeacherName = v2;
             this.tvPlaceTime = v3;
@@ -69,6 +72,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
                 .inflate(R.layout.item_lesson, parent, false);
         // set the view's size, margins, paddings and layout parameters
 
+        LinearLayout llLessonColor = (LinearLayout) v.findViewById(R.id.lL_lesson_time);
         TextView tvLesson = (TextView) v.findViewById(R.id.tv_lesson_name);
         TextView tvTeacher = (TextView) v.findViewById(R.id.tv_teacher_name);
         TextView tvPlaceT = (TextView) v.findViewById(R.id.tv_place);
@@ -76,7 +80,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         TextView ivEndTime = (TextView) v.findViewById(R.id.iv_end_time);
         ImageView ivComments = (ImageView) v.findViewById(R.id.iv_comment);
         ImageView ivShare = (ImageView) v.findViewById(R.id.iv_share);
-        ViewHolder vh = new ViewHolder(v, tvLesson, tvTeacher, tvPlaceT, ivComments, ivStartTime, ivEndTime, ivShare);
+        ViewHolder vh = new ViewHolder(v, llLessonColor, tvLesson, tvTeacher, tvPlaceT, ivComments, ivStartTime, ivEndTime, ivShare);
         return vh;
     }
 
@@ -87,6 +91,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         // - replace the contents of the view with that element
         View.OnClickListener clickListener = clickListener(mDataset.get(position).getObjectId(),
                 mDataset.get(position).getString("name"));
+        holder.llLessonColor.setBackgroundColor(Color.parseColor(mDataset.get(position).getString("color")));
         holder.itemView.setOnClickListener(clickListener);
         View.OnClickListener commentClickListener = commetnClickListener(mDataset.get(position).getObjectId());
         View.OnClickListener shareClickListener = shareClickListener(position);
