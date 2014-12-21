@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
+import com.melnykov.fab.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -43,6 +44,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
     private TextView tvPrefGroup;
 
     private User user;
+    private FloatingActionButton bSave;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,6 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() {
-        user.saveInBackground();
         super.onBackPressed();
     }
 
@@ -86,10 +87,19 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
         tvPrefLessonDuration = (TextView) findViewById(R.id.pref_lesson_duration);
         tvPrefUniversity = (TextView) findViewById(R.id.pref_university);
         tvPrefGroup = (TextView) findViewById(R.id.pref_group);
+        bSave = (FloatingActionButton) findViewById(R.id.b_save);
+        bSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user.saveInBackground();
+                finish();
+            }
+        });
     }
 
     private void setupViews() {
         //todo load values from current user
+        setTitle("Settings");
         if (user.getName() != null)
             tvPrefUserName.setText(user.getName());
 

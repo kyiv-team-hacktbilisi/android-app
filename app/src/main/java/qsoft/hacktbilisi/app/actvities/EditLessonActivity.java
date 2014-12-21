@@ -122,7 +122,7 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
             gameScore.put("type", "laboratory");
         } else if (rbLecture.isSelected()) {
             gameScore.put("type", "lection");
-        } else if (rbPractice.isSelected()) {
+        } else {
             gameScore.put("type", "practice");
         }
         gameScore.put("start_time", bStartTime.getText().toString());

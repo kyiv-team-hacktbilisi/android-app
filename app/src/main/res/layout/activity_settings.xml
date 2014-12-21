@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:fab="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
         >
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
+
             <LinearLayout
                     android:id="@+id/pref_username_container"
                     android:orientation="vertical"
@@ -33,6 +36,7 @@
                         android:paddingTop="16dp"
                         android:text="User name"
                         />
+
                 <TextView
                         android:id="@+id/pref_username"
                         android:layout_width="fill_parent"
@@ -50,6 +54,7 @@
                     android:layout_marginRight="16dp"
                     android:background="@color/dark_grey"
                     />
+
             <LinearLayout
                     android:id="@+id/pref_lesson_duration_container"
                     android:orientation="vertical"
@@ -68,6 +73,7 @@
                         android:paddingTop="16dp"
                         android:text="Lesson duration"
                         />
+
                 <TextView
                         android:id="@+id/pref_lesson_duration"
                         android:layout_width="fill_parent"
@@ -85,6 +91,7 @@
                     android:layout_marginRight="16dp"
                     android:background="@color/dark_grey"
                     />
+
             <LinearLayout
                     android:id="@+id/pref_university_container"
                     android:orientation="vertical"
@@ -103,6 +110,7 @@
                         android:paddingTop="16dp"
                         android:text="University"
                         />
+
                 <TextView
                         android:id="@+id/pref_university"
                         android:layout_width="fill_parent"
@@ -120,6 +128,7 @@
                     android:layout_marginRight="16dp"
                     android:background="@color/dark_grey"
                     />
+
             <LinearLayout
                     android:id="@+id/pref_group_container"
                     android:orientation="vertical"
@@ -138,6 +147,7 @@
                         android:paddingTop="16dp"
                         android:text="Group"
                         />
+
                 <TextView
                         android:id="@+id/pref_group"
                         android:layout_width="fill_parent"
@@ -149,4 +159,18 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <com.melnykov.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/b_save"
+            android:src="@drawable/ic_action_tick"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            fab:fab_colorNormal="@color/primary"
+            fab:fab_colorPressed="@color/accent"
+            fab:fab_colorRipple="@color/colorHighlight"
+            />
+
+</RelativeLayout>
