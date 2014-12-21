@@ -9,15 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import com.melnykov.fab.FloatingActionButton;
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
+import com.parse.*;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.pojo.Group;
 import qsoft.hacktbilisi.app.pojo.University;
 import qsoft.hacktbilisi.app.pojo.User;
 import qsoft.hacktbilisi.app.utils.Logger;
+import qsoft.hacktbilisi.app.utils.Utils;
 
 import java.util.List;
 
@@ -212,12 +210,13 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (userInput.getText().toString().length() > 0) {
-                            prefOption.setText(userInput.getText().toString());
+                        String s = userInput.getText().toString();
+                        if (s.length() > 0) {
+                            prefOption.setText(s);
                             if (optId == R.id.pref_university_container) {
-                                user.setUniversity(userInput.getText().toString());
+                                setUniversity(s);
                             } else if (optId == R.id.pref_group_container) {
-                                user.setGroup(userInput.getText().toString());
+                                setGroup(s);
                             }
                             //todo if item doesn't exists do smth
                         }
@@ -232,6 +231,66 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    private void setUniversity(final String u){
+        ParseQuery<University> query = ParseQuery.getQuery("University");
+        query.whereEqualTo("name", u);
+        query.getFirstInBackground(new GetCallback<University>() {
+            public void done(University result, ParseException e) {
+                if (e == null) {
+                    user.setUniversity(result.getObjectId());
+
+                    Logger.d("Retrieved the object.");
+                } else {
+                    final University university = new University();
+                    university.setName(u);
+                    university.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                Logger.d("new uid=" + university.getObjectId());
+                                user.setUniversity(university.getObjectId());
+                            } else {
+                                Logger.d("Creating the object failed");
+                            }
+                        }
+                    });
+                    Logger.e("The getFirst request failed.");
+                }
+            }
+        });
+    }
+
+    private void setGroup(final String group){
+        ParseQuery<Group> query = ParseQuery.getQuery("Group");
+        query.whereEqualTo("name", group);
+        query.getFirstInBackground(new GetCallback<Group>() {
+            public void done(Group result, ParseException e) {
+                if (e == null) {
+                    user.setGroup(result.getObjectId());
+                    Utils.savePrefs(context, user);
+                    Logger.d("Retrieved the object.");
+                } else {
+                    final Group group1 = new Group();
+                    group1.setName(group);
+                    group1.setUniversityID(user.getUniversity());
+                    group1.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                Logger.d("new gid=" + group1.getObjectId());
+                                user.setGroup(group1.getObjectId());
+                                Utils.savePrefs(context, user);
+                            } else {
+                                Logger.d("Creating the object failed");
+                            }
+                        }
+                    });
+                    Logger.e("The getFirst group request failed.");
+                }
+            }
+        });
     }
 
     private void loadUniversities(final AutoCompleteTextView autoCompleteTextView) {
