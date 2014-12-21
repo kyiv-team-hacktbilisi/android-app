@@ -61,6 +61,7 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
             public void done(User result, ParseException e) {
                 if (e == null) {
                     tvAuthor.setText(result.getName());
+                    ivIcon.setText(result.getName().substring(0, 1).toUpperCase());
                     Logger.d("Retrieved the object.");
                 } else {
                     Logger.e("The getFirst request failed.");
