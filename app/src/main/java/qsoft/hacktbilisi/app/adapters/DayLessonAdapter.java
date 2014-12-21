@@ -95,7 +95,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
             holder.ivStartTime.setText(mDataset.get(position).getString("start_time"));
             int d = ParseUser.getCurrentUser().getInt("lessonDuration");
             holder.ivEndTime.setText(simpleDateFormat.format(new Date(data.getTime() +
-                    60000 * d == 0 ? 90 : d)));
+                    (60000 * (d == 0 ? 90 : d)))));
         } catch (ParseException e) {
             e.printStackTrace();
         }

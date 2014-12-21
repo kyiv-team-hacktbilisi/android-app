@@ -45,6 +45,7 @@ public class ScheduleDayActivity extends FragmentActivity {
     }
 
     private void setupViews() {
+        getActionBar().setIcon(R.drawable.list);
         TimeTable timeTable = new TimeTable();
         timeTable.setDaysNum(5);
         mDaysPagerAdapter = new DaysPagerAdapter(getSupportFragmentManager(), context, timeTable);
