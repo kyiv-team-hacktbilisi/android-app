@@ -82,7 +82,7 @@
                     android:src="@drawable/ic_share"
                     android:layout_below="@+id/fl_split_line"
                     android:layout_toLeftOf="@+id/iv_comment"
-                    android:foreground="@drawable/ripple_card"
+                    android:background="@drawable/ripple_circle_button"
                     android:padding="14dp"
                     />
 

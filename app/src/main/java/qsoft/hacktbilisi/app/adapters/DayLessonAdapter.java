@@ -33,6 +33,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView ivStartTime;
         private final TextView ivEndTime;
+        private final ImageView ivShare;
         // each data item is just a string in this case
         public TextView tvLessonName;
         public TextView tvTeacherName;
@@ -40,7 +41,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         public ImageView ivComments;
 
 
-        public ViewHolder(View v, TextView v1, TextView v2, TextView v3, ImageView ivComments, TextView ivStartTime, TextView ivEndTime) {
+        public ViewHolder(View v, TextView v1, TextView v2, TextView v3, ImageView ivComments, TextView ivStartTime, TextView ivEndTime, ImageView ivShare) {
             super(v);
             this.tvLessonName = v1;
             this.tvTeacherName = v2;
@@ -48,6 +49,7 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
             this.ivComments = ivComments;
             this.ivStartTime = ivStartTime;
             this.ivEndTime = ivEndTime;
+            this.ivShare = ivShare;
         }
     }
 
@@ -72,22 +74,20 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         TextView ivStartTime = (TextView) v.findViewById(R.id.iv_start_time);
         TextView ivEndTime = (TextView) v.findViewById(R.id.iv_end_time);
         ImageView ivComments = (ImageView) v.findViewById(R.id.iv_comment);
+        ImageView ivShare = (ImageView) v.findViewById(R.id.iv_share);
         View.OnClickListener clickListener = clickListener();
         v.setOnClickListener(clickListener);
-        ViewHolder vh = new ViewHolder(v, tvLesson, tvTeacher, tvPlaceT, ivComments, ivStartTime, ivEndTime);
+        ViewHolder vh = new ViewHolder(v, tvLesson, tvTeacher, tvPlaceT, ivComments, ivStartTime, ivEndTime, ivShare);
         return vh;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-//        holder.tvLessonName.setText(mDataset[position]);
-//        holder.tvTeacherName.setText(mDataset[position]);
-//        holder.tvPlaceTime.setText(mDataset[position]);
         View.OnClickListener commentClickListener = commetnClickListener(mDataset.get(position).getObjectId());
+        View.OnClickListener shareClickListener = shareClickListener(position);
         holder.ivComments.setOnClickListener(commentClickListener);
+        holder.ivShare.setOnClickListener(shareClickListener);
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
@@ -102,6 +102,34 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         holder.tvLessonName.setText(mDataset.get(position).getString("name"));
         holder.tvTeacherName.setText(mDataset.get(position).getString("teacher"));
         holder.tvPlaceTime.setText(mDataset.get(position).getString("audience"));
+    }
+
+    private View.OnClickListener shareClickListener(final int pos) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String start_time = mDataset.get(pos).getString("start_time");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+                Date data = null;
+                try {
+                    data = simpleDateFormat.parse(mDataset.get(pos).getString("start_time"));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                int d = ParseUser.getCurrentUser().getInt("lessonDuration");
+                String end_time = simpleDateFormat.format(new Date(data.getTime() +
+                        (60000 * (d == 0 ? 90 : d))));
+                String name = mDataset.get(pos).getString("name");
+                String teacher = mDataset.get(pos).getString("teacher");
+                String audience = mDataset.get(pos).getString("audience");
+                String text = "You'll have " + name + "\nat " + start_time + " to " + end_time + "\n" + audience + ", " + teacher;
+                Intent intent2 = new Intent();
+                intent2.setAction(Intent.ACTION_SEND);
+                intent2.setType("text/plain");
+                intent2.putExtra(Intent.EXTRA_TEXT, text);
+                context.startActivity(Intent.createChooser(intent2, "Share lesson via"));
+            }
+        };
     }
 
     // Return the size of your dataset (invoked by the layout manager)
