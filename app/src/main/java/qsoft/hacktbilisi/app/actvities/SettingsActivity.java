@@ -233,14 +233,14 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
         alertDialog.show();
     }
 
-    private void setUniversity(final String u){
+    private void setUniversity(final String u) {
         ParseQuery<University> query = ParseQuery.getQuery("University");
         query.whereEqualTo("name", u);
         query.getFirstInBackground(new GetCallback<University>() {
             public void done(University result, ParseException e) {
                 if (e == null) {
                     user.setUniversity(result.getObjectId());
-
+                    user.saveInBackground();
                     Logger.d("Retrieved the object.");
                 } else {
                     final University university = new University();
@@ -251,6 +251,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
                             if (e == null) {
                                 Logger.d("new uid=" + university.getObjectId());
                                 user.setUniversity(university.getObjectId());
+                                user.saveInBackground();
                             } else {
                                 Logger.d("Creating the object failed");
                             }
@@ -262,7 +263,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
         });
     }
 
-    private void setGroup(final String group){
+    private void setGroup(final String group) {
         ParseQuery<Group> query = ParseQuery.getQuery("Group");
         query.whereEqualTo("name", group);
         query.getFirstInBackground(new GetCallback<Group>() {
