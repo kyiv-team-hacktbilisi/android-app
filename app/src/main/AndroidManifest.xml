@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="qsoft.hacktbilisi.app"
         >
 
@@ -11,11 +12,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
+            tools:replace="android:icon,android:theme"
             android:allowBackup="true"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/list"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
-            android:name=".app.App">
+            android:name=".app.App"
+            >
         <activity
                 android:name=".actvities.LoginActivity"
                 android:label="@string/app_name"

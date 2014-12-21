@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.parse.*;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.adapters.DayLessonAdapter;
+
+import java.util.List;
 
 /**
  * Created by andrii on 20.12.14.
@@ -60,9 +64,20 @@ public class DayFragment extends Fragment {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(context);
         rvLessons.setLayoutManager(mLayoutManager);
-        String[] myDataset = {"2", "2", "2", "2"};
         // specify an adapter (see also next example)
-        mAdapter = new DayLessonAdapter(context, myDataset);
-        rvLessons.setAdapter(mAdapter);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Lesson");
+        query.whereEqualTo("group_id", ParseUser.getCurrentUser().get("group"));
+        query.whereEqualTo("day", dayPosition);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> scoreList, ParseException e) {
+                if (e == null) {
+                    mAdapter = new DayLessonAdapter(context, scoreList);
+                    rvLessons.setAdapter(mAdapter);
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 }

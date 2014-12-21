@@ -8,9 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.actvities.CommentsActivity;
 import qsoft.hacktbilisi.app.actvities.LessonPreviewActivity;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by andrii on 20.12.14.
@@ -18,12 +25,14 @@ import qsoft.hacktbilisi.app.actvities.LessonPreviewActivity;
 public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.ViewHolder> {
 
     private Context context;
-    private String[] mDataset;
+    private List<ParseObject> mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView ivStartTime;
+        private final TextView ivEndTime;
         // each data item is just a string in this case
         public TextView tvLessonName;
         public TextView tvTeacherName;
@@ -31,17 +40,19 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         public ImageView ivComments;
 
 
-        public ViewHolder(View v, TextView v1, TextView v2, TextView v3, ImageView ivComments) {
+        public ViewHolder(View v, TextView v1, TextView v2, TextView v3, ImageView ivComments, TextView ivStartTime, TextView ivEndTime) {
             super(v);
             this.tvLessonName = v1;
             this.tvTeacherName = v2;
             this.tvPlaceTime = v3;
             this.ivComments = ivComments;
+            this.ivStartTime = ivStartTime;
+            this.ivEndTime = ivEndTime;
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public DayLessonAdapter(Context context, String[] myDataset) {
+    public DayLessonAdapter(Context context, List<ParseObject> myDataset) {
         this.context = context;
         mDataset = myDataset;
     }
@@ -58,10 +69,12 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
         TextView tvLesson = (TextView) v.findViewById(R.id.tv_lesson_name);
         TextView tvTeacher = (TextView) v.findViewById(R.id.tv_teacher_name);
         TextView tvPlaceT = (TextView) v.findViewById(R.id.tv_place);
+        TextView ivStartTime = (TextView) v.findViewById(R.id.iv_start_time);
+        TextView ivEndTime = (TextView) v.findViewById(R.id.iv_end_time);
         ImageView ivComments = (ImageView) v.findViewById(R.id.iv_comment);
         View.OnClickListener clickListener = clickListener();
         v.setOnClickListener(clickListener);
-        ViewHolder vh = new ViewHolder(v, tvLesson, tvTeacher, tvPlaceT, ivComments);
+        ViewHolder vh = new ViewHolder(v, tvLesson, tvTeacher, tvPlaceT, ivComments, ivStartTime, ivEndTime);
         return vh;
     }
 
@@ -75,12 +88,26 @@ public class DayLessonAdapter extends RecyclerView.Adapter<DayLessonAdapter.View
 //        holder.tvPlaceTime.setText(mDataset[position]);
         View.OnClickListener commentClickListener = commetnClickListener();
         holder.ivComments.setOnClickListener(commentClickListener);
+
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+            Date data = simpleDateFormat.parse(mDataset.get(position).getString("start_time"));
+            holder.ivStartTime.setText(mDataset.get(position).getString("start_time"));
+            int d = ParseUser.getCurrentUser().getInt("lessonDuration");
+            holder.ivEndTime.setText(simpleDateFormat.format(new Date(data.getTime() +
+                    (60000 * (d == 0 ? 90 : d)))));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.tvLessonName.setText(mDataset.get(position).getString("name"));
+        holder.tvTeacherName.setText(mDataset.get(position).getString("teacher"));
+        holder.tvPlaceTime.setText(mDataset.get(position).getString("audience"));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
     }
 
 
