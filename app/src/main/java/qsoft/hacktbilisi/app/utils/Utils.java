@@ -33,6 +33,18 @@ public class Utils {
         return user;
     }
 
+    public static void saveCurrTab(Context context, int id) {
+        SharedPreferences prefs = context.getSharedPreferences("currDayPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("currDay", id);
+        editor.commit();
+    }
+
+    public static int restoreCurrTab(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("currDayPrefs", Context.MODE_PRIVATE);
+        return prefs.getInt("currDay", 0);
+    }
+
     public static void clearLoginState(Context con) {
         Logger.d("Clearing login state");
         SharedPreferences prefs = con.getSharedPreferences("loginStatePrefs", Context.MODE_PRIVATE);

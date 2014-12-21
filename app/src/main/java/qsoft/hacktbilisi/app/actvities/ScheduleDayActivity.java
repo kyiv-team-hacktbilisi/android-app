@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.adapters.DaysPagerAdapter;
 import qsoft.hacktbilisi.app.pojo.TimeTable;
+import qsoft.hacktbilisi.app.utils.Logger;
+import qsoft.hacktbilisi.app.utils.Utils;
 
 /**
  * Created by andrii on 20.12.14.
@@ -21,7 +23,7 @@ public class ScheduleDayActivity extends FragmentActivity {
     public static ViewPager mViewPager;
 
     public static DaysPagerAdapter mDaysPagerAdapter;
-    private int selected=0;
+    private int selected = 0;
 
 
     @Override
@@ -39,6 +41,13 @@ public class ScheduleDayActivity extends FragmentActivity {
         setupViews();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Logger.d("mViewPager.getCurrentItem()=" + mViewPager.getCurrentItem());
+        Utils.saveCurrTab(context, mViewPager.getCurrentItem());
+    }
+
     private void initViews() {
         mViewPager = (ViewPager) findViewById(R.id.pager);
 //        PagerTitleStrip strip = (PagerTitleStrip)mViewPager.findViewById(R.id.pager_title_strip);
@@ -51,6 +60,8 @@ public class ScheduleDayActivity extends FragmentActivity {
         mDaysPagerAdapter = new DaysPagerAdapter(getSupportFragmentManager(), context, timeTable);
         mViewPager.setAdapter(mDaysPagerAdapter);
         mDaysPagerAdapter.setContext(this);
+        int a = Utils.restoreCurrTab(context);
+        mViewPager.setCurrentItem(a);
         mDaysPagerAdapter.setCurrPage(mViewPager.getCurrentItem());
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
