@@ -33,12 +33,44 @@ public class Lesson extends ParseObject {
         put("type", type);
     }
 
+    public String getColor() {
+        return getString("color");
+    }
+
+    public void setColor(String color) {
+        put("color", color);
+    }
+
     public String getAudience() {
         return getString("audience");
     }
 
     public void setAudience(String audience) {
         put("audience", audience);
+    }
+
+    public int getDay() {
+        return getInt("day");
+    }
+
+    public void setDay(int day) {
+        put("day", day);
+    }
+
+    public String getGroupId() {
+        return getString("group_id");
+    }
+
+    public void setGroupId(String groupId) {
+        put("group_id", groupId);
+    }
+
+    public boolean getPrivate() {
+        return getBoolean("private");
+    }
+
+    public void setPrivate(boolean b) {
+        put("private", b);
     }
 
     public String getStartTime() {

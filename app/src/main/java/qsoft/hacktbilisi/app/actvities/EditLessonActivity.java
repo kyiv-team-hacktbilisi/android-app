@@ -9,10 +9,11 @@ import android.view.View;
 import android.widget.*;
 import com.melnykov.fab.FloatingActionButton;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import qsoft.hacktbilisi.app.R;
+import qsoft.hacktbilisi.app.pojo.Lesson;
+import qsoft.hacktbilisi.app.utils.Logger;
 import qsoft.hacktbilisi.app.utils.Utils;
 import qsoft.hacktbilisi.app.utils.it.gmariotti.android.example.colorpicker.calendarstock.ColorPickerDialog;
 import qsoft.hacktbilisi.app.utils.it.gmariotti.android.example.colorpicker.calendarstock.ColorPickerSwatch;
@@ -114,26 +115,31 @@ public class EditLessonActivity extends Activity implements View.OnClickListener
     }
 
     private void save() {
-        ParseObject gameScore = new ParseObject("Lesson");
-        gameScore.put("name", lessonName.getText().toString());
-        gameScore.put("audience", Integer.parseInt(audiance.getText().toString()));
-        gameScore.put("teacher", teacher.getText().toString());
+        Lesson gameScore = new Lesson();
+        gameScore.setName(lessonName.getText().toString());
+        gameScore.setAudience(audiance.getText().toString());
+        gameScore.setTeacher(teacher.getText().toString());
         if (rbLabs.isSelected()) {
-            gameScore.put("type", "laboratory");
+            gameScore.setType("Laboratory");
         } else if (rbLecture.isSelected()) {
-            gameScore.put("type", "lection");
+            gameScore.setType("Lection");
         } else {
-            gameScore.put("type", "practice");
+            gameScore.setType("Practice");
         }
-        gameScore.put("startTime", bStartTime.getText().toString());
-        gameScore.put("color", stringSelectedColor == null ? "#ffffff" : stringSelectedColor);
-        gameScore.put("private", swIsPrivate.isChecked());
-        gameScore.put("group_id", ParseUser.getCurrentUser().get("group"));
-        gameScore.put("day", getIntent().getIntExtra("day", 0));
+        gameScore.setStartTime(bStartTime.getText().toString());
+        gameScore.setColor(stringSelectedColor == null ? "#ffffff" : stringSelectedColor);
+        gameScore.setPrivate(swIsPrivate.isChecked());
+        gameScore.setGroupId(ParseUser.getCurrentUser().getString("group"));
+        gameScore.setDay(getIntent().getIntExtra("day", 0));
         gameScore.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                finish();
+                if (e == null) {
+                    finish();
+                } else {
+                    Logger.d("ex=" + e.getMessage());
+                    Toast.makeText(context, "Error while saveing", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
