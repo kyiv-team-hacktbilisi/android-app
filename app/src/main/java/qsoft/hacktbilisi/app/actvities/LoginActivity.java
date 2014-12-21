@@ -16,7 +16,6 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import qsoft.hacktbilisi.app.R;
-import qsoft.hacktbilisi.app.utils.EmailValidator;
 import qsoft.hacktbilisi.app.pojo.User;
 import qsoft.hacktbilisi.app.utils.Logger;
 import qsoft.hacktbilisi.app.utils.Utils;
@@ -50,6 +49,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         if (token != null) {
             User.becomeInBackground(token, new LogInCallback() {
                 public void done(ParseUser user, ParseException e) {
+                    dialog.dismiss();
                     if (user != null) {
                         // The current user is now set to user.
                         Intent intent = new Intent(context, ChooseUniversityActivity.class);
@@ -58,8 +58,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     finish();
                 }
             });
+        } else {
+            dialog.dismiss();
         }
-        dialog.dismiss();
 
         initViews();
         setupViews();

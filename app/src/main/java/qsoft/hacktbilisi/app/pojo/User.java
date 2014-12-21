@@ -7,11 +7,11 @@ import com.parse.ParseUser;
 public class User extends ParseUser {
 
     public String getName() {
-        return getString("firstName");
+        return getString("username");
     }
 
     public void setName(String name) {
-        put("firstName", name);
+        put("username", name);
     }
 
     public String getLessonDuration() {

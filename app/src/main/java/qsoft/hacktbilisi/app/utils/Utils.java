@@ -4,11 +4,34 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import qsoft.hacktbilisi.app.R;
+import qsoft.hacktbilisi.app.pojo.User;
 
 /**
  * Created by andrii on 20.12.14.
  */
 public class Utils {
+
+    public static void savePrefs(Context context, User user) {
+        //todo save
+        SharedPreferences prefs = context.getSharedPreferences("userPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("uName", user.getName());
+        editor.putString("lDuration", user.getLessonDuration());
+        editor.putString("univer", user.getUniversity());
+        editor.putString("group", user.getGroup());
+        editor.commit();
+    }
+
+
+    public static User restorePrefs(Context context) {
+        User user = new User();
+        SharedPreferences prefs = context.getSharedPreferences("userPrefs", Context.MODE_PRIVATE);
+        user.setName(prefs.getString("uName", null));
+        user.setLessonDuration(prefs.getString("lDuration", null));
+        user.setUniversity(prefs.getString("univer", null));
+        user.setGroup(prefs.getString("group", null));
+        return user;
+    }
 
     public static void saveLoginState(String sessionToken, Context con) {
         Logger.d("Saving login state");

@@ -15,7 +15,7 @@
     <!--<requestFocus/>-->
     <!--</AutoCompleteTextView>-->
 
-    <qsoft.hacktbilisi.app.objects.PrefAutoCompleteTextView
+    <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/actvDialogUserInput"
@@ -23,5 +23,5 @@
             android:singleLine="true"
             android:dropDownHeight="200dp">
         <requestFocus/>
-    </qsoft.hacktbilisi.app.objects.PrefAutoCompleteTextView>
+    </AutoCompleteTextView>
 </LinearLayout>

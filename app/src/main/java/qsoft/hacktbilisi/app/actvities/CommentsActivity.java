@@ -2,18 +2,24 @@ package qsoft.hacktbilisi.app.actvities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.adapters.CommentsAdapter;
 import qsoft.hacktbilisi.app.pojo.Comment;
 import qsoft.hacktbilisi.app.pojo.User;
+import qsoft.hacktbilisi.app.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by andrii on 20.12.14.
@@ -29,6 +35,7 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
     private CommentsAdapter adapter;
 
     private ArrayList<Comment> comments;
+    private String lessonID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +43,10 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_comments);
 
         context = this;
-        loadComments();
+
+        Intent intent = getIntent();
+        lessonID = intent.getStringExtra("lessonID");
+
     }
 
     @Override
@@ -53,9 +63,9 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
     }
 
     private void setupViews() {
+        loadComments();
+
         ivSendComment.setOnClickListener(this);
-        adapter = new CommentsAdapter(context, comments);
-        lvComments.setAdapter(adapter);
     }
 
     private void loadComments() {
@@ -69,6 +79,21 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
         comments.add(comment);
         comments.add(comment);
         comments.add(comment);
+
+        ParseQuery<Comment> query = ParseQuery.getQuery("Comment");
+        query.whereEqualTo("lessonID", lessonID);
+        query.findInBackground(new FindCallback<Comment>() {
+            public void done(List<Comment> eventList, ParseException e) {
+                if (e == null) {
+                    comments = new ArrayList<>(eventList);
+                    adapter = new CommentsAdapter(context, comments);
+                    lvComments.setAdapter(adapter);
+                } else {
+                    Logger.d("Error: " + e.getMessage());
+                    //todo show error screen or message
+                }
+            }
+        });
     }
 
     @Override
@@ -78,7 +103,7 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
                 String c = etComment.getText().toString();
                 if (c != null && c.length() > 0) {
                     Comment comment = new Comment();
-                    comment.setLessonID("12345678");
+                    comment.setLessonID(lessonID);
                     comment.setAuthorID(User.getCurrentUser().getObjectId());
                     comment.setText(c);
                     comment.setTime(new Date());
@@ -86,6 +111,7 @@ public class CommentsActivity extends Activity implements View.OnClickListener {
                     adapter.notifyDataSetChanged();
                     etComment.setText("");
                     scrollListViewToBottom();
+                    comment.saveEventually();
                 }
                 break;
         }

@@ -15,6 +15,7 @@ import qsoft.hacktbilisi.app.R;
 import qsoft.hacktbilisi.app.pojo.Group;
 import qsoft.hacktbilisi.app.pojo.User;
 import qsoft.hacktbilisi.app.utils.Logger;
+import qsoft.hacktbilisi.app.utils.Utils;
 
 import java.util.List;
 
@@ -110,8 +111,9 @@ public class ChooseGroupActivity extends Activity implements View.OnClickListene
                         public void done(Group result, ParseException e) {
                             if (e == null) {
                                 user.setGroup(result.getObjectId());
+                                user.setLessonDuration("90");
                                 user.saveInBackground();
-
+                                Utils.savePrefs(context, user);
                                 Logger.d("Retrieved the object.");
                             } else {
                                 final Group group1 = new Group();
@@ -123,7 +125,9 @@ public class ChooseGroupActivity extends Activity implements View.OnClickListene
                                         if (e == null) {
                                             Logger.d("new gid=" + group1.getObjectId());
                                             user.setGroup(group1.getObjectId());
+                                            user.setLessonDuration("90");
                                             user.saveInBackground();
+                                            Utils.savePrefs(context, user);
                                         } else {
                                             Logger.d("Creating the object failed");
                                         }

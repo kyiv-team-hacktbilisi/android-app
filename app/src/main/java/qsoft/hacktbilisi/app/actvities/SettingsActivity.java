@@ -4,24 +4,26 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import qsoft.hacktbilisi.app.R;
-import qsoft.hacktbilisi.app.objects.PrefAutoCompleteTextView;
+import qsoft.hacktbilisi.app.pojo.Group;
+import qsoft.hacktbilisi.app.pojo.University;
 import qsoft.hacktbilisi.app.pojo.User;
+import qsoft.hacktbilisi.app.utils.Logger;
+
+import java.util.List;
 
 /**
  * Created by andrii on 20.12.14.
  */
-public class SettingsActivity extends Activity implements View.OnClickListener, TextWatcher {
+public class SettingsActivity extends Activity implements View.OnClickListener {//}, TextWatcher {
 
     private Context context;
 
@@ -47,6 +49,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         context = this;
+        user = (User) User.getCurrentUser();
     }
 
     @Override
@@ -59,14 +62,13 @@ public class SettingsActivity extends Activity implements View.OnClickListener, 
 
     @Override
     public void onBackPressed() {
-        savePrefs();
+        user.saveInBackground();
         super.onBackPressed();
     }
 
     private void getCurrentUser() {
         //todo load curr user
-        user = new User();
-        restorePrefs();
+        user = (User) User.getCurrentUser();
     }
 
     private void initViews() {
@@ -94,11 +96,33 @@ public class SettingsActivity extends Activity implements View.OnClickListener, 
         if (user.getLessonDuration() != null)
             tvPrefLessonDuration.setText(user.getLessonDuration());
 
-        if (user.getUniversity() != null)
-            tvPrefUniversity.setText(user.getUniversity());
+        if (user.getUniversity() != null) {
+            ParseQuery<University> query = ParseQuery.getQuery("University");
+            query.whereEqualTo("objectId", user.getUniversity());
+            query.getFirstInBackground(new GetCallback<University>() {
+                public void done(University result, ParseException e) {
+                    if (e == null) {
+                        tvPrefUniversity.setText(result.getName());
+                    } else {
+                        Logger.e("The getFirst request failed.");
+                    }
+                }
+            });
+        }
 
-        if (user.getGroup() != null)
-            tvPrefGroup.setText(user.getGroup());
+        if (user.getGroup() != null) {
+            ParseQuery<Group> query = ParseQuery.getQuery("Group");
+            query.whereEqualTo("objectId", user.getGroup());
+            query.getFirstInBackground(new GetCallback<Group>() {
+                public void done(Group result, ParseException e) {
+                    if (e == null) {
+                        tvPrefGroup.setText(result.getName());
+                    } else {
+                        Logger.e("The getFirst request failed.");
+                    }
+                }
+            });
+        }
 
         llPrefUserName.setOnClickListener(this);
         llPrefLessonDuration.setOnClickListener(this);
@@ -106,26 +130,6 @@ public class SettingsActivity extends Activity implements View.OnClickListener, 
         llPrefGroup.setOnClickListener(this);
     }
 
-    private void savePrefs() {
-        //todo save
-        SharedPreferences prefs = context.getSharedPreferences("userPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("uName", user.getName());
-        editor.putString("lDuration", user.getLessonDuration());
-        editor.putString("univer", user.getUniversity());
-        editor.putString("group", user.getGroup());
-        editor.commit();
-    }
-
-
-    private void restorePrefs() {
-        user = new User();
-        SharedPreferences prefs = context.getSharedPreferences("userPrefs", Context.MODE_PRIVATE);
-        user.setName(prefs.getString("uName", null));
-        user.setLessonDuration(prefs.getString("lDuration", null));
-        user.setUniversity(prefs.getString("univer", null));
-        user.setGroup(prefs.getString("group", null));
-    }
 
     @Override
     public void onClick(View v) {
@@ -182,13 +186,14 @@ public class SettingsActivity extends Activity implements View.OnClickListener, 
 
         alertDialogBuilder.setView(promptsView);
 
-        final PrefAutoCompleteTextView userInput = (PrefAutoCompleteTextView) promptsView.findViewById(R.id.actvDialogUserInput);
-        userInput.setThreshold(2);
-        userInput.addTextChangedListener(this);
-        String[] universities = {"KPI", "Not KPI", "NAU", "Georgian University"};
-        ArrayAdapter adapter = new ArrayAdapter
-                (this, android.R.layout.simple_list_item_1, universities);
-        userInput.setAdapter(adapter);
+        final AutoCompleteTextView userInput = (AutoCompleteTextView) promptsView.findViewById(R.id.actvDialogUserInput);
+
+        if (optId == R.id.pref_university_container) {
+            loadUniversities(userInput);
+        } else if (optId == R.id.pref_group_container) {
+            loadGroups(userInput);
+        }
+
         userInput.setEnabled(true);
 
         alertDialogBuilder
@@ -219,29 +224,49 @@ public class SettingsActivity extends Activity implements View.OnClickListener, 
         alertDialog.show();
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    private void loadUniversities(final AutoCompleteTextView autoCompleteTextView) {
+        ParseQuery<University> query = ParseQuery.getQuery("University");
+        query.findInBackground(new FindCallback<University>() {
+            public void done(List<University> eventList, ParseException e) {
+                if (e == null) {
+                    String[] universities = new String[eventList.size()];
+                    for (int i = 0; i < universities.length; i++) {
+                        universities[i] = eventList.get(i).getName();
+                        Logger.d(universities[i]);
+                    }
+                    ArrayAdapter adapter = new ArrayAdapter
+                            (context, android.R.layout.simple_list_item_1, universities);
+                    autoCompleteTextView.setAdapter(adapter);
+                } else {
+                    Logger.d("Error while load univers: " + e.getMessage());
+                    //todo show error screen or message
+                }
+            }
+        });
+    }
+
+    private void loadGroups(final AutoCompleteTextView autoCompleteTextView) {
+        ParseQuery<Group> query = ParseQuery.getQuery("Group");
+        query.whereEqualTo("universityID", user.getUniversity());
+        query.findInBackground(new FindCallback<Group>() {
+            public void done(List<Group> eventList, ParseException e) {
+                if (e == null) {
+                    String[] groups = new String[eventList.size()];
+                    for (int i = 0; i < groups.length; i++) {
+                        groups[i] = eventList.get(i).getName();
+                        Logger.d(groups[i]);
+                    }
+                    ArrayAdapter adapter = new ArrayAdapter
+                            (context, android.R.layout.simple_list_item_1, groups);
+                    autoCompleteTextView.setAdapter(adapter);
+                } else {
+                    Logger.d("Error: " + e.getMessage());
+                    //todo show error screen or message
+                }
+            }
+        });
+
 
     }
 
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        //todo request univers or groups
-//        if (s.length() >= 2) {
-//            String[] params = {s + ""};
-//            if (citiesAsync == null) {
-//                startAsync(params);
-//                citiesAsync = null;
-//            } else {
-//                citiesAsync.cancel(true);
-//                citiesAsync = null;
-//                startAsync(params);
-//            }
-//        }
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
-    }
 }

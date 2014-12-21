@@ -1,45 +1,45 @@
 package qsoft.hacktbilisi.app.pojo;
 
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+
 import java.util.Date;
 
 /**
  * Created by andrii on 20.12.14.
  */
-public class Comment {
-    private String authorID;
-    private String text;
-    private String lessonID;
-    private Date time;
+@ParseClassName("Comment")
+public class Comment extends ParseObject {
 
     public String getAuthorID() {
-        return authorID;
+        return getString("authorID");
     }
 
     public void setAuthorID(String authorID) {
-        this.authorID = authorID;
+        put("authorID", authorID);
     }
 
     public String getText() {
-        return text;
+        return getString("text");
     }
 
     public void setText(String text) {
-        this.text = text;
+        put("text", text);
     }
 
     public String getLessonID() {
-        return lessonID;
+        return getString("lessonID");
     }
 
     public void setLessonID(String lessonID) {
-        this.lessonID = lessonID;
+        put("lessonID", lessonID);
     }
 
     public Date getTime() {
-        return time;
+        return getDate("time");
     }
 
     public void setTime(Date time) {
-        this.time = time;
+        put("time", time);
     }
 }
