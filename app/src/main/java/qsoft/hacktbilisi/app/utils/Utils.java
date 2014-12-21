@@ -33,6 +33,15 @@ public class Utils {
         return user;
     }
 
+    public static void clearLoginState(Context con) {
+        Logger.d("Clearing login state");
+        SharedPreferences prefs = con.getSharedPreferences("loginStatePrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.commit();
+        Logger.d("Cleared");
+    }
+
     public static void saveLoginState(String sessionToken, Context con) {
         Logger.d("Saving login state");
         SharedPreferences prefs = con.getSharedPreferences("loginStatePrefs", Context.MODE_PRIVATE);

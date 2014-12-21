@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
     private LinearLayout llPrefLessonDuration;
     private LinearLayout llPrefUniversity;
     private LinearLayout llPrefGroup;
+    private LinearLayout llPrefLogOut;
 
     private TextView tvPrefUserNameLabel;
     private TextView tvPrefLessonDurationLabel;
@@ -75,6 +77,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
         llPrefLessonDuration = (LinearLayout) findViewById(R.id.pref_lesson_duration_container);
         llPrefUniversity = (LinearLayout) findViewById(R.id.pref_university_container);
         llPrefGroup = (LinearLayout) findViewById(R.id.pref_group_container);
+        llPrefLogOut = (LinearLayout) findViewById(R.id.pref_logout_container);
 
         tvPrefUserNameLabel = (TextView) findViewById(R.id.pref_username_label);
         tvPrefLessonDurationLabel = (TextView) findViewById(R.id.pref_lesson_duration_label);
@@ -136,6 +139,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
         llPrefLessonDuration.setOnClickListener(this);
         llPrefUniversity.setOnClickListener(this);
         llPrefGroup.setOnClickListener(this);
+        llPrefLogOut.setOnClickListener(this);
     }
 
 
@@ -153,6 +157,13 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.pref_group_container:
                 showAutoCompleteDialog(tvPrefGroupLabel, tvPrefGroup, v.getId());
+                break;
+            case R.id.pref_logout_container:
+                User.logOut();
+                Utils.clearLoginState(context);
+                Intent intent = new Intent(context, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
     }

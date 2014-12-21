@@ -48,7 +48,7 @@
                         />
             </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/pref_lesson_duration_container"
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
@@ -78,7 +78,7 @@
                         />
             </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/pref_university_container"
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
@@ -108,7 +108,7 @@
                         />
             </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/pref_group_container"
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
@@ -137,6 +137,37 @@
                         android:paddingBottom="10dp"
                         />
             </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/pref_logout_container"
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="72dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:clickable="true"
+                        >
+
+                        <TextView
+                                android:id="@+id/pref_logout_label"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:paddingTop="16dp"
+                                android:text="Log out"
+                                android:textStyle="bold"
+                                />
+
+                        <TextView
+                                android:id="@+id/pref_logoout"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Leave this session"
+                                android:textSize="14sp"
+                                android:layout_marginTop="8dp"
+                                android:paddingBottom="10dp"
+                                />
+                </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
