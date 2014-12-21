@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.melnykov.fab.FloatingActionButton;
 import qsoft.hacktbilisi.app.R;
@@ -25,6 +26,8 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
     private FloatingActionButton bShowComments;
 
     private Lesson lesson;
+    private ListView cList;
+    private TextView tvComm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,8 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
         tvTime = (TextView) findViewById(R.id.tv_time);
         bShowComments = (FloatingActionButton) findViewById(R.id.b_show_comments);
         bShowComments.show(true);
+        cList = (ListView) findViewById(R.id.lv_comments);
+        tvComm = (TextView) findViewById(R.id.tv_comments);
     }
 
     private void setupViews() {
@@ -65,6 +70,8 @@ public class LessonPreviewActivity extends Activity implements View.OnClickListe
             //todo format date
 //            tvTime.setText(lesson.getStartTime());
         }
+
+        
 
         bShowComments.setOnClickListener(this);
     }
